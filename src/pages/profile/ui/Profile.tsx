@@ -23,6 +23,7 @@ const containerStyle: SxProps<Theme> = {
 	borderRadius: 5,
 	gap: 7,
 	p: 0,
+	flexWrap: "wrap",
 };
 
 async function Profile() {

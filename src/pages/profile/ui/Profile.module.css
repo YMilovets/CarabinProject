@@ -1,15 +1,15 @@
 .root {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 7.5rem 3.75rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: calc(3.75em + 60px) 3.75em 7.5em;
 }
 
 .image {
-    border-radius: 1em;
+	border-radius: 1em;
 }
 
 .image.image_default {
-    filter: brightness(0) invert(1);;
+	filter: brightness(0) invert(1);
 }

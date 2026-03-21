@@ -3,5 +3,5 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
-	padding: 7.5em 3.75em;
+	padding: calc(3.75em + 60px) 3.75em 7.5em;
 }

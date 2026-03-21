@@ -1,3 +1,4 @@
+import React from "react";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -8,10 +9,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/src/widgets/header";
 
 import { ProfileProvider, ThemeProvider } from "../../providers";
+import MainLayout from "../MainLayout/MainLayout";
 
 import "../../styles";
-
-import styles from "./AppLayout.module.css";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -49,10 +49,10 @@ async function AppLayout({ children }: LayoutProps<"/">) {
 					<ProfileProvider>
 						<AppRouterCacheProvider options={{ enableCssLayer: true }}>
 							<ThemeProvider>
-								<main className={styles.main}>
+								<MainLayout>
 									<Header />
 									{children}
-								</main>
+								</MainLayout>
 							</ThemeProvider>
 						</AppRouterCacheProvider>
 					</ProfileProvider>

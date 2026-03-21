@@ -1,0 +1,4 @@
+.menu ::before {
+	--menu-left: 14px;
+	--menu-right: none;
+}

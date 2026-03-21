@@ -4,7 +4,7 @@ import React from "react";
 import { Nightlight, Sunny } from "@mui/icons-material";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 
-import { useTheme } from "../../hooks";
+import { useTheme } from "@/src/shared/hooks";
 
 import styles from "./ThemeControl.module.css";
 

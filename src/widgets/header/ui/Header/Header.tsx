@@ -3,6 +3,8 @@ import { Box, Container, Toolbar, Typography } from "@mui/material";
 
 import Link from "next/link";
 
+import { ThemeControl } from "@/src/features/main";
+
 import ButtonLink from "../ButtonLink";
 import ToolbarContainer from "../Toolbar";
 
@@ -29,6 +31,7 @@ function Header() {
 							</ButtonLink>
 						))}
 					</Box>
+					<ThemeControl />
 				</Toolbar>
 			</Container>
 		</ToolbarContainer>

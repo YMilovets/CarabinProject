@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Header } from "@/src/widgets/header";
 
+import ThemeLayout from "../ThemeLayout";
+
 import "../../styles";
 
 import styles from "./AppLayout.module.css";
@@ -37,10 +39,12 @@ function AppLayout({ children }: LayoutProps<"/">) {
 		<html lang="ru">
 			<body className={`${geistSans.variable} ${geistMono.variable}`}>
 				<AppRouterCacheProvider options={{ enableCssLayer: true }}>
-					<main className={styles.main}>
-						<Header />
-						{children}
-					</main>
+					<ThemeLayout>
+						<main className={styles.main}>
+							<Header />
+							{children}
+						</main>
+					</ThemeLayout>
 				</AppRouterCacheProvider>
 			</body>
 		</html>

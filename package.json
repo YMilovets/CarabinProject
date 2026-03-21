@@ -3,35 +3,36 @@
   "version": "0.1.0",
 	"type": "module",
 	"author": "YMilovets",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@emotion/cache": "11.14.0",
-    "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.1",
-    "@mui/icons-material": "7.3.9",
-    "@mui/material": "7.3.9",
-    "@mui/material-nextjs": "7.3.9",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "eslint",
+		"prepare": "git config core.hooksPath .git-hooks || echo 'Not in a git repo'"
+	},
+	"dependencies": {
+		"@emotion/cache": "11.14.0",
+		"@emotion/react": "11.14.0",
+		"@emotion/styled": "11.14.1",
+		"@mui/icons-material": "7.3.9",
+		"@mui/material": "7.3.9",
+		"@mui/material-nextjs": "7.3.9",
 		"jiti": "2.6.1",
-    "next": "15.5.12",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
-  },
-  "devDependencies": {
+		"next": "15.5.12",
+		"react": "19.2.3",
+		"react-dom": "19.2.3"
+	},
+	"devDependencies": {
 		"@eslint/js": "9.39.4",
 		"@types/eslint": "9.6.1",
-    "@types/node": "20",
-    "@types/react": "19",
-    "@types/react-dom": "19",
+		"@types/node": "20",
+		"@types/react": "19",
+		"@types/react-dom": "19",
 		"@typescript-eslint/eslint-plugin": "8.46.1",
 		"@typescript-eslint/parser": "8.46.1",
-    "eslint": "9.38.0",
-    "eslint-config-next": "16.1.6",
+		"eslint": "9.38.0",
+		"eslint-config-next": "16.1.6",
 		"eslint-import-resolver-typescript": "4.4.4",
 		"eslint-plugin-import": "2.32.0",
 		"eslint-plugin-react-hooks": "7.0.0",
@@ -40,5 +41,5 @@
 		"globals": "17.4.0",
 		"typescript": "5.9.3",
 		"typescript-eslint": "8.57.0"
-  }
+	}
 }

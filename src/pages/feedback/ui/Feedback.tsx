@@ -1,20 +1,27 @@
 import React from "react";
 import { Alert } from "@mui/material";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { Metadata } from "next";
 
 import styles from "./Feedback.module.css";
 
-export const metadata: Metadata = {
-	title: "Обратная связь",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const messages = await getMessages();
 
-function Editor() {
+	return {
+		title: messages.feedbackPage.title,
+	};
+}
+
+async function Editor() {
+	const t = await getTranslations("common");
+	const subT = await getTranslations("feedbackPage");
+
 	return (
 		<section className={styles.root}>
 			<Alert variant="outlined" severity="warning">
-				Раздел {metadata.title?.toString()} в приложении КАРАБИН находится в
-				разработке
+				{t("alert", { page: subT("title") })}
 			</Alert>
 		</section>
 	);

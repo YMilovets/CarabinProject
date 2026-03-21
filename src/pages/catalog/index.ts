@@ -1,1 +1,1 @@
-export { default, metadata } from "./ui/Catalog";
+export { default, generateMetadata } from "./ui/Catalog";

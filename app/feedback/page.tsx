@@ -1,1 +1,1 @@
-export { default, metadata } from "@/src/pages/feedback";
+export { default, generateMetadata } from "@/src/pages/feedback";

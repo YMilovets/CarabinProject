@@ -4,11 +4,12 @@ import { alpha, AppBar, useColorScheme } from "@mui/material";
 
 import { ToolbarProps } from "./types";
 
-function Toolbar({ children }: ToolbarProps) {
+function Toolbar({ children, ...props }: ToolbarProps) {
 	const { mode } = useColorScheme();
 	const isDarkMode = mode === "dark";
 	return (
 		<AppBar
+			{...props}
 			sx={{
 				boxShadow: "none",
 				backdropFilter: "blur(0.5em)",

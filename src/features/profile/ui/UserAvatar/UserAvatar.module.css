@@ -1,0 +1,7 @@
+.image {
+    border-radius: 1em;
+}
+
+.image.image_default {
+    filter: brightness(0) invert(1);
+}

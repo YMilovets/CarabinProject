@@ -6,6 +6,8 @@ export enum Pages {
 	Feedback = "feedback",
 }
 
+export const ProfileRoute = "/profile";
+
 export const PagesList: Array<Omit<PageType, "value">> = [
 	{
 		id: Pages.Catalog,

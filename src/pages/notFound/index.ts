@@ -1,1 +1,1 @@
-export { default, metadata } from "./ui/NotFound";
+export { default, generateMetadata } from "./ui/NotFound";

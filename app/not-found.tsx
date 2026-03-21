@@ -1,1 +1,1 @@
-export { default, metadata } from "@/src/pages/notFound";
+export { default, generateMetadata } from "@/src/pages/notFound";

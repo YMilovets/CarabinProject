@@ -1,6 +1,9 @@
 import React from "react";
 import { Theme } from "@emotion/react";
 import { Box, Paper, SxProps, Typography } from "@mui/material";
+import { getMessages, getTranslations } from "next-intl/server";
+
+import { Metadata } from "next";
 
 import { LoginForm } from "@/src/features/login";
 
@@ -13,16 +16,21 @@ const containerStyle: SxProps<Theme> = {
 	padding: 2.5,
 };
 
-export const metadata = {
-	title: "Войти в систему",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const messages = await getMessages();
 
-function Login() {
+	return {
+		title: messages.loginPage.title,
+	};
+}
+
+async function Login() {
+	const t = await getTranslations("loginPage");
 	return (
 		<section className={styles.root}>
 			<Box>
 				<Paper sx={containerStyle} variant="elevation">
-					<Typography variant="h6">Войти в систему</Typography>
+					<Typography variant="h6">{t("formTitle")}</Typography>
 					<LoginForm />
 				</Paper>
 			</Box>

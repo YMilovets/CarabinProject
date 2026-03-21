@@ -1,17 +1,25 @@
 import React from "react";
 import { Alert } from "@mui/material";
+import { getMessages, getTranslations } from "next-intl/server";
+
+import { Metadata } from "next";
 
 import styles from "./NotFound.module.css";
 
-export const metadata = {
-	title: "Страница не найдена",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const messages = await getMessages();
 
-function NotFound() {
+	return {
+		title: messages.notFoundPage.title,
+	};
+}
+
+async function NotFound() {
+	const t = await getTranslations("notFoundPage");
 	return (
 		<section className={styles.root}>
 			<Alert variant="outlined" severity="error">
-				Страница не найдена
+				{t("alert")}
 			</Alert>
 		</section>
 	);

@@ -1,43 +1,37 @@
 "use client";
 
 import React, { SubmitEventHandler } from "react";
-import { Alert, TextField } from "@mui/material";
+import { Alert } from "@mui/material";
 import { useTranslations } from "next-intl";
-
-import { Form } from "@/src/shared";
 
 import { useSignForm } from "../../hooks";
 
-function SignForm() {
+import { SignFormProps } from "./types";
+
+import styles from "./SignForm.module.css";
+
+function SignForm({ children, ...props }: SignFormProps) {
+	const { onSubmit, errorStatus } = useSignForm();
 	const t = useTranslations("loginPage");
-	const { errorStatus, onSubmit } = useSignForm();
 
 	const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
+		if (e.currentTarget.password) {
+			e.currentTarget.password.value = "";
+		}
 		onSubmit(formData);
 	};
 
 	return (
-		<Form
-			errorContainer={
-				errorStatus ? (
-					<Alert variant="outlined" severity="error">
-						{t(errorStatus)}
-					</Alert>
-				) : null
-			}
-			onSubmit={handleSubmit}
-		>
-			<TextField name="email" label={t("email")} variant="outlined" required />
-			<TextField
-				name="password"
-				label={t("password")}
-				variant="outlined"
-				type="password"
-				required
-			/>
-		</Form>
+		<form {...props} onSubmit={handleSubmit} className={styles.form}>
+			{children}
+			{errorStatus ? (
+				<Alert variant="outlined" severity="error">
+					{t(errorStatus)}
+				</Alert>
+			) : null}
+		</form>
 	);
 }
 

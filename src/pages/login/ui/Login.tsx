@@ -7,7 +7,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { SignForm } from "@/src/features/login";
+import { SignForm, SignFormControl } from "@/src/features/login";
 import { authConfig, ProfileRoute } from "@/src/shared/config";
 
 import styles from "./Login.module.css";
@@ -37,7 +37,9 @@ async function Login() {
 			<Box>
 				<Paper sx={containerStyle} variant="elevation">
 					<Typography variant="h6">{t("formTitle")}</Typography>
-					<SignForm />
+					<SignForm>
+						<SignFormControl />
+					</SignForm>
 				</Paper>
 			</Box>
 		</section>

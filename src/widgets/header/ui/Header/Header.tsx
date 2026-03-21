@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Toolbar, Typography } from "@mui/material";
+import { Box, Toolbar, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 
 import Link from "next/link";
@@ -17,27 +17,25 @@ async function Header() {
 
 	return (
 		<ToolbarContainer>
-			<Container maxWidth="xl">
-				<Toolbar variant="regular">
-					<Typography
-						sx={{ mr: 3, color: "inherit", fontWeight: 500 }}
-						component={Link}
-						href="/"
-						noWrap
-						variant="h5"
-					>
-						{t("logo")}
-					</Typography>
-					<Box>
-						{pages.map(({ id, value, path }) => (
-							<ButtonLink path={path} key={id}>
-								{value}
-							</ButtonLink>
-						))}
-					</Box>
-					<ThemeControl />
-				</Toolbar>
-			</Container>
+			<Toolbar variant="regular">
+				<Typography
+					sx={{ mr: 3, color: "inherit", fontWeight: 500 }}
+					component={Link}
+					href="/"
+					noWrap
+					variant="h5"
+				>
+					{t("logo")}
+				</Typography>
+				<Box>
+					{pages.map(({ id, value, path }) => (
+						<ButtonLink path={path} key={id}>
+							{value}
+						</ButtonLink>
+					))}
+				</Box>
+				<ThemeControl />
+			</Toolbar>
 		</ToolbarContainer>
 	);
 }

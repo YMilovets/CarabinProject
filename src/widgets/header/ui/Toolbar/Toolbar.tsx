@@ -18,6 +18,8 @@ function Toolbar({ children }: ToolbarProps) {
 				borderBottom: 1,
 				borderStyle: "solid",
 				borderColor: (theme) => theme.palette.grey[isDarkMode ? 800 : 300],
+				pl: 7.5,
+				pr: 7.5,
 			}}
 			color="default"
 		>

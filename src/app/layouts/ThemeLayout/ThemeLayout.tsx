@@ -11,6 +11,18 @@ const theme = createTheme({
 		dark: true,
 		light: true,
 	},
+	components: {
+		MuiToolbar: {
+			styleOverrides: {
+				root: {
+					"@media (min-width: 0px)": {
+						paddingLeft: 0,
+						paddingRight: 0,
+					},
+				},
+			},
+		},
+	},
 });
 
 function ThemeLayout({ children }: ThemeLayoutProps) {

@@ -4,16 +4,14 @@ import { getTranslations } from "next-intl/server";
 
 import Link from "next/link";
 
+import { Navigation } from "@/src/features/header";
 import { ThemeControl } from "@/src/features/main";
+import { UserProfile } from "@/src/features/profile";
 
-import ButtonLink from "../ButtonLink";
 import ToolbarContainer from "../Toolbar";
-
-import { getPages } from "./utils";
 
 async function Header() {
 	const t = await getTranslations("common");
-	const pages = await getPages();
 
 	return (
 		<ToolbarContainer>
@@ -27,14 +25,11 @@ async function Header() {
 				>
 					{t("logo")}
 				</Typography>
-				<Box>
-					{pages.map(({ id, value, path }) => (
-						<ButtonLink path={path} key={id}>
-							{value}
-						</ButtonLink>
-					))}
+				<Navigation />
+				<Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
+					<ThemeControl />
+					<UserProfile />
 				</Box>
-				<ThemeControl />
 			</Toolbar>
 		</ToolbarContainer>
 	);

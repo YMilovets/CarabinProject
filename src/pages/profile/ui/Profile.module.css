@@ -1,0 +1,15 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 7.5rem 3.75rem;
+}
+
+.image {
+    border-radius: 1em;
+}
+
+.image.image_default {
+    filter: brightness(0) invert(1);;
+}

@@ -20,6 +20,8 @@
 	},
 	"profilePage": {
 		"title": "Профиль",
+		"header": "Профиль пользователя {username}",
+		"email": "Электронная почта",
 		"filePhoto": "Фото профиля {username}"
 	},
 	"common": {

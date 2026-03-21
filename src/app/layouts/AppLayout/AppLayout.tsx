@@ -7,7 +7,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Header } from "@/src/widgets/header";
 
-import ThemeLayout from "../ThemeLayout";
+import { ProfileProvider, ThemeProvider } from "../../providers";
 
 import "../../styles";
 
@@ -46,14 +46,16 @@ async function AppLayout({ children }: LayoutProps<"/">) {
 		<html lang={locale}>
 			<body className={`${geistSans.variable} ${geistMono.variable}`}>
 				<NextIntlClientProvider messages={messages}>
-					<AppRouterCacheProvider options={{ enableCssLayer: true }}>
-						<ThemeLayout>
-							<main className={styles.main}>
-								<Header />
-								{children}
-							</main>
-						</ThemeLayout>
-					</AppRouterCacheProvider>
+					<ProfileProvider>
+						<AppRouterCacheProvider options={{ enableCssLayer: true }}>
+							<ThemeProvider>
+								<main className={styles.main}>
+									<Header />
+									{children}
+								</main>
+							</ThemeProvider>
+						</AppRouterCacheProvider>
+					</ProfileProvider>
 				</NextIntlClientProvider>
 			</body>
 		</html>

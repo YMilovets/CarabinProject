@@ -4,7 +4,7 @@ import React from "react";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { ThemeLayoutProps } from "./types";
+import { ThemeProps } from "./types";
 
 const theme = createTheme({
 	colorSchemes: {
@@ -25,7 +25,7 @@ const theme = createTheme({
 	},
 });
 
-function ThemeLayout({ children }: ThemeLayoutProps) {
+function Theme({ children }: ThemeProps) {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -34,4 +34,4 @@ function ThemeLayout({ children }: ThemeLayoutProps) {
 	);
 }
 
-export default ThemeLayout;
+export default Theme;

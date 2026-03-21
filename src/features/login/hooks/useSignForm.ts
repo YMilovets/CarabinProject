@@ -24,6 +24,7 @@ export default function useSignForm() {
 
 		if (result && result.ok) {
 			router.push(callbackUrl);
+			router.refresh();
 			return;
 		}
 

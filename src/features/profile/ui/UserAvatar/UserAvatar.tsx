@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useColorScheme } from "@mui/material";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -9,17 +8,17 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 import { accountBox } from "@/src/shared";
+import { useTheme } from "@/src/shared/hooks";
 
 import styles from "./UserAvatar.module.css";
 
 function UserAvatar() {
 	const t = useTranslations("profilePage");
-	const { mode } = useColorScheme();
 	const { data } = useSession();
+	const { isDarkMode } = useTheme();
 
 	const { user } = { ...data };
 	const { image, name: username } = { ...user };
-	const isDarkMode = mode === "dark";
 
 	return (
 		<Image

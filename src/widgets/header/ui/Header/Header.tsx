@@ -4,9 +4,10 @@ import { getTranslations } from "next-intl/server";
 
 import Link from "next/link";
 
-import { Navigation } from "@/src/features/header";
+import { MobileMenu, Navigation } from "@/src/features/header";
 import { ThemeControl } from "@/src/features/main";
 import { UserProfile } from "@/src/features/profile";
+import { DisplayObserver } from "@/src/shared";
 
 import ToolbarContainer from "../Toolbar";
 
@@ -25,9 +26,16 @@ async function Header() {
 				>
 					{t("logo")}
 				</Typography>
-				<Navigation />
+				<DisplayObserver isMobileMode={false}>
+					<MobileMenu />
+				</DisplayObserver>
+				<DisplayObserver>
+					<Navigation />
+				</DisplayObserver>
 				<Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
-					<ThemeControl />
+					<DisplayObserver width={500}>
+						<ThemeControl />
+					</DisplayObserver>
 					<UserProfile />
 				</Box>
 			</Toolbar>

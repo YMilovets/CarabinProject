@@ -1,88 +1,76 @@
 "use client";
 
 import React from "react";
-import {
-	Avatar,
-	Box,
-	IconButton,
-	Menu,
-	MenuItem,
-	Tooltip,
-} from "@mui/material";
+import { Avatar, IconButton, MenuItem } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { ProfileRoute } from "@/src/shared";
+import { Menu, ProfileRoute } from "@/src/shared";
+import { useMenu, useProfileId } from "@/src/shared/hooks";
 
-import { useMenu, useProfileId } from "../../hooks";
-
-import { MenuStyle } from "./constants";
+import styles from "./UserProfile.module.css";
 
 function UserProfile() {
 	const { data } = useSession();
-	const router = useRouter();
 
 	const { anchorEl, isOpen, onClick, onClose } = useMenu();
 	const { buttonId, menuId } = useProfileId();
 
+	const pathname = usePathname();
+
 	const t = useTranslations("common");
 	const pT = useTranslations("profilePage");
 
+	const isProfile = pathname === ProfileRoute;
+
 	if (!data) return null;
 	return (
-		<>
-			<Box>
-				<Tooltip
-					title={t("profileSettings", { username: data.user?.name || "" })}
+		<Menu
+			buttonRenderFn={(isBtnOpen, ariaLabel, btnId) => (
+				<IconButton
+					id={btnId}
+					aria-label={ariaLabel}
+					aria-controls={isBtnOpen ? menuId : undefined}
+					aria-expanded={isBtnOpen}
+					aria-haspopup
+					tabIndex={-1}
+					onClick={onClick}
+					sx={{ p: 0.5 }}
 				>
-					<IconButton
-						id={buttonId}
-						aria-label={t("profileMenu")}
-						aria-controls={isOpen ? menuId : undefined}
-						aria-expanded={isOpen}
-						aria-haspopup
-						tabIndex={-1}
-						onClick={onClick}
-						sx={{ p: 0.5 }}
-					>
-						<Avatar src={data.user?.image ?? undefined} />
-					</IconButton>
-				</Tooltip>
-			</Box>
-			<Menu
-				open={isOpen}
-				anchorEl={anchorEl}
-				onClose={onClose}
-				id={menuId}
-				slotProps={{
-					paper: {
-						elevation: 0,
-						sx: MenuStyle,
-					},
-				}}
-				transformOrigin={{ horizontal: "right", vertical: "top" }}
-				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-			>
+					<Avatar src={data.user?.image ?? undefined} />
+				</IconButton>
+			)}
+			anchorEl={anchorEl}
+			isOpen={isOpen}
+			menuChildren={[
 				<MenuItem
-					onClick={() => {
-						onClose();
-						router.push(ProfileRoute);
-					}}
+					onClick={onClose}
+					key="title"
+					selected={isProfile}
+					href={ProfileRoute}
+					component={Link}
 				>
 					{pT("title")}
-				</MenuItem>
+				</MenuItem>,
 				<MenuItem
 					onClick={() => {
-						signOut({ callbackUrl: "/" });
 						onClose();
+						signOut({ callbackUrl: "/" });
 					}}
+					key="exit"
 				>
 					{t("exit")}
-				</MenuItem>
-			</Menu>
-		</>
+				</MenuItem>,
+			]}
+			onClose={onClose}
+			menuId={menuId}
+			buttonId={buttonId}
+			ariaLabel={t("profileMenu")}
+			className={styles.menu}
+		/>
 	);
 }
 

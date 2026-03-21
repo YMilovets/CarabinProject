@@ -1,12 +1,13 @@
 "use client";
 
-import { alpha, AppBar, useColorScheme } from "@mui/material";
+import { alpha, AppBar } from "@mui/material";
+
+import { useTheme } from "@/src/shared/hooks";
 
 import { ToolbarProps } from "./types";
 
 function Toolbar({ children, ...props }: ToolbarProps) {
-	const { mode } = useColorScheme();
-	const isDarkMode = mode === "dark";
+	const { isDarkMode } = useTheme();
 	return (
 		<AppBar
 			{...props}
@@ -19,8 +20,8 @@ function Toolbar({ children, ...props }: ToolbarProps) {
 				borderBottom: 1,
 				borderStyle: "solid",
 				borderColor: (theme) => theme.palette.grey[isDarkMode ? 800 : 300],
-				pl: 7.5,
-				pr: 7.5,
+				pl: "3.75em",
+				pr: "3.75em",
 			}}
 			color="default"
 		>

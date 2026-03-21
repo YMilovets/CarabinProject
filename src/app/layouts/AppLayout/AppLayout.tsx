@@ -1,5 +1,7 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -21,31 +23,38 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-	title: {
-		template: "%s | КАРАБИН - каталог адресов",
-		default: "КАРАБИН - каталог адресов",
-	},
-	description:
-		"КАРАБИН - каталог адресов для анализа возможного открытия нового заведения и развития бизнеса в сфере услуг",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const messages = await getMessages();
+	return {
+		title: {
+			template: messages.common.title,
+			default: messages.mainPage.title,
+		},
+		description: messages.common.description,
+	};
+}
 
 export const viewport = {
 	content: "initial-scale=1, width=device-width",
 };
 
-function AppLayout({ children }: LayoutProps<"/">) {
+async function AppLayout({ children }: LayoutProps<"/">) {
+	const messages = await getMessages();
+	const locale = await getLocale();
+
 	return (
-		<html lang="ru">
+		<html lang={locale}>
 			<body className={`${geistSans.variable} ${geistMono.variable}`}>
-				<AppRouterCacheProvider options={{ enableCssLayer: true }}>
-					<ThemeLayout>
-						<main className={styles.main}>
-							<Header />
-							{children}
-						</main>
-					</ThemeLayout>
-				</AppRouterCacheProvider>
+				<NextIntlClientProvider messages={messages}>
+					<AppRouterCacheProvider options={{ enableCssLayer: true }}>
+						<ThemeLayout>
+							<main className={styles.main}>
+								<Header />
+								{children}
+							</main>
+						</ThemeLayout>
+					</AppRouterCacheProvider>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);

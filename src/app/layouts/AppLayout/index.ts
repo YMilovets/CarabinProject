@@ -1,3 +1,3 @@
-import AppLayout, { metadata } from "./AppLayout";
+import AppLayout, { generateMetadata } from "./AppLayout";
 
-export { AppLayout, metadata };
+export { AppLayout, generateMetadata };

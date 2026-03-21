@@ -1,1 +1,1 @@
-export { AppLayout, metadata } from "./AppLayout";
+export { AppLayout, generateMetadata } from "./AppLayout";

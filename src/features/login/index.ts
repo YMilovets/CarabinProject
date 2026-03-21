@@ -1,1 +1,2 @@
-export { default as LoginForm } from "./ui/LoginForm";
+export { default as SignForm } from "./ui/SignForm";
+export { default as SignFormSuspense } from "./ui/SignFormSuspense";

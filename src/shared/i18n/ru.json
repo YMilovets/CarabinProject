@@ -1,10 +1,12 @@
 {
 	"loginPage": {
 		"username": "Имя пользователя",
+		"email": "Электронная почта",
 		"password": "Пароль",
 		"formTitle": "Войти в систему",
 		"title": "Войти",
-		"buttonTitle": "Отправить"
+		"buttonTitle": "Отправить",
+		"CredentialsSignin": "Пользователь не найден!"
 	},
 	"catalogPage": { "title": "Каталог адресов" },
 	"mainPage": {

@@ -9,7 +9,13 @@ import { FormProps } from "./types";
 
 import styles from "./Form.module.css";
 
-function Form({ onSubmit, children, sendBtnTitle, ...props }: FormProps) {
+function Form({
+	onSubmit,
+	children,
+	sendBtnTitle,
+	errorContainer,
+	...props
+}: FormProps) {
 	const t = useTranslations("loginPage");
 	const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -30,6 +36,7 @@ function Form({ onSubmit, children, sendBtnTitle, ...props }: FormProps) {
 					>
 						{sendBtnTitle ?? t("buttonTitle")}
 					</Button>
+					{errorContainer}
 				</FormGroup>
 			</FormControl>
 		</form>

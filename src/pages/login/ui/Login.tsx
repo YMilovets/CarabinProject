@@ -5,7 +5,7 @@ import { getMessages, getTranslations } from "next-intl/server";
 
 import { Metadata } from "next";
 
-import { LoginForm } from "@/src/features/login";
+import { SignForm, SignFormSuspense } from "@/src/features/login";
 
 import styles from "./Login.module.css";
 
@@ -31,7 +31,9 @@ async function Login() {
 			<Box>
 				<Paper sx={containerStyle} variant="elevation">
 					<Typography variant="h6">{t("formTitle")}</Typography>
-					<LoginForm />
+					<SignFormSuspense>
+						<SignForm />
+					</SignFormSuspense>
 				</Paper>
 			</Box>
 		</section>

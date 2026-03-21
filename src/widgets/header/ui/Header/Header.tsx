@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Container, Toolbar, Typography } from "@mui/material";
+import { getTranslations } from "next-intl/server";
 
 import Link from "next/link";
 
@@ -8,9 +9,12 @@ import { ThemeControl } from "@/src/features/main";
 import ButtonLink from "../ButtonLink";
 import ToolbarContainer from "../Toolbar";
 
-import { pages } from "./constants";
+import { getPages } from "./utils";
 
-function Header() {
+async function Header() {
+	const t = await getTranslations("common");
+	const pages = await getPages();
+
 	return (
 		<ToolbarContainer>
 			<Container maxWidth="xl">
@@ -22,7 +26,7 @@ function Header() {
 						noWrap
 						variant="h5"
 					>
-						PROJECT
+						{t("logo")}
 					</Typography>
 					<Box>
 						{pages.map(({ id, value, path }) => (

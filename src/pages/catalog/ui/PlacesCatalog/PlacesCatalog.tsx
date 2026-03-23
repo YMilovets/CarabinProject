@@ -1,20 +1,39 @@
 "use client";
 
 import React from "react";
-import { CircularProgress, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 import { PlacesCard, useGetPlacesQuery } from "@/src/entities/catalog";
+import {
+	PlacesSearch,
+	PlacesSort,
+	useCatalogParams,
+} from "@/src/features/catalog";
 import { formatDate } from "@/src/shared/utils/client";
+
+import PlacesAlert from "../PlacesAlert";
 
 import { GRID_GAP } from "./constants";
 
 function PlacesCatalog() {
-	const { isLoading, isError, data } = useGetPlacesQuery({});
+	const t = useTranslations("common");
+	const { params } = useCatalogParams();
+
+	const { isLoading, isError, data } = useGetPlacesQuery(
+		Object.fromEntries(params),
+	);
 
 	const { data: calalog = [] } = { ...data };
 
 	return (
 		<>
+			<Box sx={{ display: "flex", gap: 2 }}>
+				<PlacesSearch />
+				<PlacesSort />
+			</Box>
+
+			{isError && <PlacesAlert>{t("refusedConnection")}</PlacesAlert>}
 			{isLoading && <CircularProgress />}
 			{!isError && (
 				<Grid container spacing={GRID_GAP}>

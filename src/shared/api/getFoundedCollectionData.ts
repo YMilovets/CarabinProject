@@ -12,7 +12,6 @@ function getFoundedCollectionData<TResponse extends Document>({
 	errorData = [],
 	notFoundData = [],
 	onSuccess = (data) => data,
-	onResponse = (data) => data,
 }: CollectionDataType<TResponse>) {
 	return async (filter: Filter<TResponse> = {}) => {
 		const client = await connectDB(String(process.env.DB_DATABASE));
@@ -21,7 +20,7 @@ function getFoundedCollectionData<TResponse extends Document>({
 		try {
 			const connection = client.db();
 			const scripts = connection.collection<TResponse>(collection);
-			const response = await onResponse(scripts.find(filter)).toArray();
+			const response = await scripts.find(filter).toArray();
 
 			if (response.length === 0) {
 				return NextResponse.json(

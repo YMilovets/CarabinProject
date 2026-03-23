@@ -15,6 +15,7 @@ function getResponse({ nextUrl: { searchParams } }: NextRequest) {
 			{ category: { $regex: search, $options: options } },
 			{ description: { $regex: search, $options: options } },
 		],
+		isPublished: true,
 	});
 }
 

@@ -8,7 +8,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Header } from "@/src/widgets/header";
 
-import { ProfileProvider, ThemeProvider } from "../../providers";
+import { ProfileProvider, ReduxProvider, ThemeProvider } from "../../providers";
 import MainLayout from "../MainLayout/MainLayout";
 
 import "../../styles";
@@ -49,10 +49,12 @@ async function AppLayout({ children }: LayoutProps<"/">) {
 					<ProfileProvider>
 						<AppRouterCacheProvider options={{ enableCssLayer: true }}>
 							<ThemeProvider>
-								<MainLayout>
-									<Header />
-									{children}
-								</MainLayout>
+								<ReduxProvider>
+									<MainLayout>
+										<Header />
+										{children}
+									</MainLayout>
+								</ReduxProvider>
 							</ThemeProvider>
 						</AppRouterCacheProvider>
 					</ProfileProvider>

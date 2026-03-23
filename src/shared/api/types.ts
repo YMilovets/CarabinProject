@@ -10,11 +10,16 @@ export type PlacesResponse = {
 	category: string;
 	address: string;
 	coords: { lat: number; long: number };
-	image: string;
+	image: {
+		url: string;
+		alt?: string;
+	};
 	description: string;
-	isPublished: true;
+	isPublished: boolean;
 	date: string;
 } & Document;
+
+export type PlacesRequest = { search: string };
 
 export type CollectionDataType<TResponse> = {
 	collection: string;

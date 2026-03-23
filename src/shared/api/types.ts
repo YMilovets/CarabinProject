@@ -1,4 +1,4 @@
-import { ObjectId, WithId } from "mongodb";
+import { FindCursor, ObjectId, WithId } from "mongodb";
 
 export type Response<TBody> = {
 	data: TBody;
@@ -19,13 +19,16 @@ export type PlacesResponse = {
 	date: string;
 } & Document;
 
-export type PlacesRequest = { search: string };
+export type PlacesRequest = { search: string; sortBy: string; sortAt: number };
 
 export type CollectionDataType<TResponse> = {
 	collection: string;
 	errorData?: Array<TResponse> | null;
 	notFoundData?: Array<TResponse> | null;
 	onSuccess?: (response: WithId<TResponse>[]) => void;
+	onResponse?: (
+		response: FindCursor<WithId<TResponse>>,
+	) => FindCursor<WithId<TResponse>>;
 };
 
 export enum Status {
@@ -36,3 +39,9 @@ export enum Status {
 
 export type Params = { id: string };
 export type RouteProps<TParam = Params> = { params: Promise<Partial<TParam>> };
+
+export enum SortOrder {
+	Asc = 1,
+	Desc = -1,
+	Default = 0,
+}

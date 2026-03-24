@@ -8,6 +8,7 @@ import { connectDB } from "../utils";
 import { CollectionDataType, Status } from "./types";
 
 function getFoundedCollectionData<TResponse extends Document>({
+	headers,
 	collection,
 	errorData = [],
 	notFoundData = [],
@@ -26,18 +27,21 @@ function getFoundedCollectionData<TResponse extends Document>({
 			if (response.length === 0) {
 				return NextResponse.json(
 					{ data: notFoundData, error: t("notFound") },
-					{ status: Status.NotFound },
+					{
+						status: Status.NotFound,
+						headers,
+					},
 				);
 			}
 
 			return NextResponse.json(
 				{ data: onSuccess(response), error: null },
-				{ status: Status.Success },
+				{ status: Status.Success, headers },
 			);
 		} catch (error) {
 			return NextResponse.json(
 				{ data: errorData, error: (error as Error).message },
-				{ status: Status.ServerError },
+				{ status: Status.ServerError, headers },
 			);
 		} finally {
 			client.close();

@@ -18,8 +18,8 @@ import {
 import { useTranslations } from "next-intl";
 
 import { useGetPlacesQuery } from "@/src/entities/catalog";
-import { SortOrder } from "@/src/shared/api/types";
 import { useProfileId } from "@/src/shared/hooks";
+import { SortOrder } from "@/src/shared/types";
 
 import { useCatalogParams } from "../../hooks";
 

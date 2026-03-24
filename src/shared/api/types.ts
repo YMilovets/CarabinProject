@@ -22,6 +22,7 @@ export type PlacesResponse = {
 export type PlacesRequest = { search: string; sortBy: string; sortAt: number };
 
 export type CollectionDataType<TResponse> = {
+	headers?: HeadersInit;
 	collection: string;
 	errorData?: Array<TResponse> | null;
 	notFoundData?: Array<TResponse> | null;
@@ -39,9 +40,3 @@ export enum Status {
 
 export type Params = { id: string };
 export type RouteProps<TParam = Params> = { params: Promise<Partial<TParam>> };
-
-export enum SortOrder {
-	Asc = 1,
-	Desc = -1,
-	Default = 0,
-}

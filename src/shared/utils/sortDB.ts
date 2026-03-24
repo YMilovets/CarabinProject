@@ -1,8 +1,8 @@
 import { FindCursor } from "mongodb";
 
-import { SortOrder } from "./types";
+import { SortOrder } from "../types";
 
-export default function sortPlacesData<TResponse extends FindCursor>(
+export default function sortDB<TResponse extends FindCursor>(
 	sortBy: string,
 	sortAt: number,
 ) {

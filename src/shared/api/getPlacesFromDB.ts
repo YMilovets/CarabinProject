@@ -1,10 +1,10 @@
 import { NextRequest } from "next/server";
 
-import { SortOrder } from "@/src/shared/api/types";
+import { SortOrder } from "../types";
+import { getHeaders, sortDB } from "../utils";
 
 import { PLACES_DB } from "./constants";
 import getFoundedCollectionData from "./getFoundedCollectionData";
-import sortPlacesData from "./sortPlacesData";
 import { PlacesResponse } from "./types";
 
 function getResponse({ nextUrl: { searchParams } }: NextRequest) {
@@ -16,7 +16,8 @@ function getResponse({ nextUrl: { searchParams } }: NextRequest) {
 
 	return getFoundedCollectionData<PlacesResponse>({
 		collection: PLACES_DB,
-		onResponse: sortPlacesData(sortBy, sortAt),
+		onResponse: sortDB(sortBy, sortAt),
+		headers: getHeaders(),
 	})({
 		$or: [
 			{ category: { $regex: search, $options: options } },

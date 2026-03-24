@@ -13,6 +13,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import simpleSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import eslint from "@eslint/js";
 
 const plugins: Record<string, any> = {
 	"@typescript-eslint": tseslint.plugin,
@@ -97,6 +98,12 @@ const configList: ConfigWithExtendsArray = [
 	},
 ];
 
-const commonConfig = [...nextVitals, ...nextTs, ...configList];
+const commonConfig = [
+	...nextVitals,
+	...nextTs,
+	...configList,
+	eslint.configs.recommended,
+	...tseslint.configs.recommended,
+];
 
 export default commonConfig;

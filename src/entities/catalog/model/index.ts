@@ -1,4 +1,9 @@
 export {
+	selectedCategoryReducer,
+	selectedCategoryReducerPath,
+	setSelectCategory,
+} from "./slices/categorySlice";
+export {
 	searchReducer,
 	searchReducerPath,
 	setSearchQuery,

@@ -7,6 +7,8 @@ import {
 	placesReducerPath,
 	searchReducer,
 	searchReducerPath,
+	selectedCategoryReducer,
+	selectedCategoryReducerPath,
 	sortingReducer,
 	sortingReducerPath,
 } from "@/src/entities/catalog";
@@ -16,4 +18,5 @@ export const rootReducer = combineReducers({
 	[sortingReducerPath]: sortingReducer,
 	[placesReducerPath]: placesReducer,
 	[categoriesReducerPath]: categoriesReducer,
+	[selectedCategoryReducerPath]: selectedCategoryReducer,
 });

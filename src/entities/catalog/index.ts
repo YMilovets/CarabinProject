@@ -13,6 +13,8 @@ export {
 export {
 	searchReducer,
 	searchReducerPath,
+	selectedCategoryReducer,
+	selectedCategoryReducerPath,
 	setSearchQuery,
 	setSortingAtQuery,
 	setSortingByQuery,

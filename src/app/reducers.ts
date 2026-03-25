@@ -1,6 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import {
+	categoriesReducer,
+	categoriesReducerPath,
 	placesReducer,
 	placesReducerPath,
 	searchReducer,
@@ -13,4 +15,5 @@ export const rootReducer = combineReducers({
 	[searchReducerPath]: searchReducer,
 	[sortingReducerPath]: sortingReducer,
 	[placesReducerPath]: placesReducer,
+	[categoriesReducerPath]: categoriesReducer,
 });

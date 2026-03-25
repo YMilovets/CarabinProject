@@ -19,7 +19,14 @@ export type PlacesResponse = {
 	date: string;
 } & Document;
 
+export type CategoriesResponse = {
+	_id: string;
+	count: number;
+};
+
 export type PlacesRequest = { search: string; sortBy: string; sortAt: number };
+
+export type CategoriesRequest = { search?: string };
 
 export type CollectionDataType<TResponse> = {
 	headers?: HeadersInit;

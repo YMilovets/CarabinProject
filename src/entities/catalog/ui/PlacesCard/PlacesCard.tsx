@@ -52,8 +52,12 @@ function PlacesCard({
 				>
 					<Typography variant="body2">{description}</Typography>
 					<Box sx={{ display: "flex", justifyContent: "space-between" }}>
-						{category && <Chip label={category} />}
-						<Chip icon={<CalendarMonth sx={{ width: 16 }} />} label={date} />
+						{category && <Chip sx={{ borderRadius: 1 }} label={category} />}
+						<Chip
+							sx={{ borderRadius: 1 }}
+							icon={<CalendarMonth sx={{ width: 16 }} />}
+							label={date}
+						/>
 					</Box>
 				</CardContent>
 				{moreBtnComponent && (

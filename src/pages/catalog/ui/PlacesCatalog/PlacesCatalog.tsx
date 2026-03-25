@@ -1,15 +1,11 @@
 "use client";
 
 import React from "react";
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import { useTranslations } from "next-intl";
 
 import { PlacesCard, useGetPlacesQuery } from "@/src/entities/catalog";
-import {
-	PlacesSearch,
-	PlacesSort,
-	useCatalogParams,
-} from "@/src/features/catalog";
+import { useCatalogParams } from "@/src/features/catalog/hooks";
 import { formatDate } from "@/src/shared/utils/client";
 
 import PlacesAlert from "../PlacesAlert";
@@ -28,11 +24,6 @@ function PlacesCatalog() {
 
 	return (
 		<>
-			<Box sx={{ display: "flex", gap: 2 }}>
-				<PlacesSearch />
-				<PlacesSort />
-			</Box>
-
 			{isError && <PlacesAlert>{t("refusedConnection")}</PlacesAlert>}
 			{isLoading && <CircularProgress />}
 			{!isError && (

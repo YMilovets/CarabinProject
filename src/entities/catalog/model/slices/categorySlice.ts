@@ -9,7 +9,7 @@ const initialState: { selectCategories: Record<string, boolean> } = {
 export const {
 	reducerPath: selectedCategoryReducerPath,
 	reducer: selectedCategoryReducer,
-	actions: { setSelectCategory },
+	actions: { setSelectCategory, initCategory },
 } = createSlice({
 	name: CATEGORY_SLICE_TITLE,
 	initialState,
@@ -18,12 +18,14 @@ export const {
 			state,
 			{ payload: selectedId }: PayloadAction<string>,
 		) => {
-			const isExistCategory = state.selectCategories[selectedId] === undefined;
-			const isSelected = isExistCategory
-				? !!isExistCategory
-				: !state.selectCategories[selectedId];
+			const isSelected = !state.selectCategories[selectedId];
 
 			state.selectCategories[selectedId] = isSelected;
+		},
+		initCategory: (state, { payload = [] }: PayloadAction<Array<string>>) => {
+			payload.forEach(
+				(categoryId) => (state.selectCategories[categoryId] = true),
+			);
 		},
 	},
 });

@@ -1,4 +1,5 @@
 export {
+	initCategory,
 	selectedCategoryReducer,
 	selectedCategoryReducerPath,
 	setSelectCategory,

@@ -14,10 +14,13 @@ import { GRID_GAP } from "./constants";
 
 function PlacesCatalog() {
 	const t = useTranslations("common");
-	const { params } = useCatalogParams();
+	const { params, selectedCategories } = useCatalogParams();
 
 	const { isLoading, isError, data } = useGetPlacesQuery(
 		Object.fromEntries(params),
+		{
+			skip: Object.keys(selectedCategories).length === 0,
+		},
 	);
 
 	const { data: calalog = [] } = { ...data };

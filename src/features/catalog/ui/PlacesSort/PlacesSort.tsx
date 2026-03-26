@@ -24,9 +24,18 @@ import { SortOrder } from "@/src/shared/types";
 import { useCatalogParams } from "../../hooks";
 
 function PlacesSort() {
-	const { sortAt, sortBy, handleSortAtQuery, handleSortByQuery, params } =
-		useCatalogParams();
-	const { isError } = useGetPlacesQuery(Object.fromEntries(params));
+	const {
+		sortAt,
+		sortBy,
+		handleSortAtQuery,
+		handleSortByQuery,
+		params,
+		selectedCategories,
+	} = useCatalogParams();
+	const { isError } = useGetPlacesQuery(Object.fromEntries(params), {
+		skip: Object.keys(selectedCategories).length === 0,
+	});
+
 	const { menuId } = useProfileId("menu");
 	const t = useTranslations("catalogPage");
 

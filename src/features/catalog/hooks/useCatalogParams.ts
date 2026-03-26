@@ -9,6 +9,11 @@ export default function useCatalogParams() {
 	const search = useAppSelector((state) => state.searchReducer.search);
 	const sortBy = useAppSelector((state) => state.sortingReducer.sortBy);
 	const sortAt = useAppSelector((state) => state.sortingReducer.sortAt);
+
+	const selectedCategories = useAppSelector(
+		(state) => state.selectedCategoryReducer.selectCategories,
+	);
+
 	const dispatch = useAppDispatch();
 
 	const params = new Map();
@@ -17,6 +22,12 @@ export default function useCatalogParams() {
 		params.set("sortBy", sortBy);
 		params.set("sortAt", sortAt);
 	}
+	params.set(
+		"categories",
+		Object.keys(selectedCategories).filter(
+			(selectedId) => selectedCategories[selectedId],
+		),
+	);
 
 	const handleSearch = (searchValue: string) => {
 		dispatch(setSearchQuery(searchValue));
@@ -35,6 +46,7 @@ export default function useCatalogParams() {
 		sortAt,
 		sortBy,
 		params,
+		selectedCategories,
 		handleSearch,
 		handleSortByQuery,
 		handleSortAtQuery,

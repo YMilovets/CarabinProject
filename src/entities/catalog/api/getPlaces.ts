@@ -24,7 +24,11 @@ export const {
 				Response<Array<PlacesResponse>>,
 				Partial<PlacesRequest>
 			>({
-				query: (params) => ({ url: PLACES_PATH, method: "GET", params }),
+				query: (body) => ({
+					url: PLACES_PATH,
+					body: JSON.stringify(body),
+					method: "POST",
+				}),
 			}),
 		};
 	},

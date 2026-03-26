@@ -6,6 +6,7 @@ import {
 	Response,
 } from "@/src/shared/api/types";
 
+import { initCategory } from "../model";
 import getApiURL from "../utils/getApiURL";
 
 import { CATEGORIES_PATH } from "./constants";
@@ -23,7 +24,18 @@ export const {
 			Response<Array<CategoriesResponse>>,
 			CategoriesRequest
 		>({
-			query: (params) => ({ url: CATEGORIES_PATH, params }),
+			queryFn: async (params, { dispatch }, _, baseQuery) => {
+				const { data, error, meta } = await baseQuery({
+					params,
+					url: CATEGORIES_PATH,
+				});
+
+				const categories = data as Response<Array<CategoriesResponse>>;
+				dispatch(initCategory(categories.data.map(({ _id }) => _id)));
+
+				if (error) return { error, meta };
+				return { data: categories, meta };
+			},
 		}),
 	}),
 });

@@ -39,6 +39,7 @@
 		"@types/react-dom": "19",
 		"@typescript-eslint/eslint-plugin": "8.46.1",
 		"@typescript-eslint/parser": "8.46.1",
+		"@yandex/ymaps3-types": "1.0.19017058",
 		"eslint": "9.38.0",
 		"eslint-config-next": "16.1.6",
 		"eslint-import-resolver-typescript": "4.4.4",

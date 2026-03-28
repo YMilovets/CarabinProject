@@ -8,7 +8,7 @@ export default function getHeaders(...appendHeaders: Array<[string, string]>) {
 	if (process.env.NODE_ENV !== "development") {
 		headers.append(
 			"Access-Control-Allow-Origin",
-			process.env.NEXT_PUBLIC_API_URL ?? "*",
+			process.env.NEXTAUTH_URL ?? "*",
 		);
 	}
 

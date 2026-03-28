@@ -1,3 +1,4 @@
+export type { GeoDataRequest, Response, YandexGeocodeResponse } from "./api";
 export { accountBox } from "./assets";
 export { Pages, PagesList, ProfileRoute } from "./config/pages";
 export type { PageType } from "./config/types";

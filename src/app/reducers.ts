@@ -12,6 +12,14 @@ import {
 	sortingReducer,
 	sortingReducerPath,
 } from "@/src/entities/catalog";
+import {
+	geoReducer,
+	geoReducerPath,
+	mapFeedbackReducer,
+	mapFeedbackReducerPath,
+	mapReducer,
+	mapReducerPath,
+} from "@/src/entities/feedback";
 
 export const rootReducer = combineReducers({
 	[searchReducerPath]: searchReducer,
@@ -19,4 +27,7 @@ export const rootReducer = combineReducers({
 	[placesReducerPath]: placesReducer,
 	[categoriesReducerPath]: categoriesReducer,
 	[selectedCategoryReducerPath]: selectedCategoryReducer,
+	[mapReducerPath]: mapReducer,
+	[geoReducerPath]: geoReducer,
+	[mapFeedbackReducerPath]: mapFeedbackReducer,
 });

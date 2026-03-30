@@ -20,13 +20,33 @@ export default async function getPlacesCategoriesFromDB({
 				{
 					$match: {
 						$or: [
-							{ category: { $regex: search, $options: options } },
-							{ description: { $regex: search, $options: options } },
+							{
+								category: {
+									$regex: search,
+									$options: options,
+								},
+							},
+							{
+								description: {
+									$regex: search,
+									$options: options,
+								},
+							},
 						],
+						isPublished: true,
 					},
 				},
-				{ $group: { _id: "$category", count: { $sum: 1 } } },
-				{ $sort: { count: -1 } },
+				{
+					$group: {
+						_id: "$category",
+						count: { $sum: 1 },
+					},
+				},
+				{
+					$sort: {
+						count: -1,
+					},
+				},
 			])
 			.toArray();
 

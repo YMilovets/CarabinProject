@@ -22,7 +22,7 @@ const handleSubmit = async (formData: FormData) => {
 	console.log(formData);
 };
 
-async function Editor() {
+async function Feedback() {
 	return (
 		<section className={styles.root}>
 			<Box>
@@ -39,4 +39,4 @@ async function Editor() {
 	);
 }
 
-export default Editor;
+export default Feedback;

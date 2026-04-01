@@ -5,6 +5,12 @@ export {
 	useGetGeoDataMutation,
 } from "./api/getGeoData";
 export {
+	geoSearchMiddleware,
+	geoSearchPath,
+	geoSearchReducer,
+	useGetGeoPositionSearchMutation,
+} from "./api/getGeoPositions";
+export {
 	mapMiddleware,
 	mapReducer,
 	mapReducerPath,

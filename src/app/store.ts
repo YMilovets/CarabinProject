@@ -3,7 +3,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { categoriesMiddleware, placesMiddleware } from "@/src/entities/catalog";
 
-import { geoMiddleware, mapMiddleware } from "../entities/feedback";
+import {
+	geoMiddleware,
+	geoSearchMiddleware,
+	mapMiddleware,
+} from "../entities/feedback";
 
 import { rootReducer } from "./reducers";
 
@@ -15,7 +19,8 @@ export function setupStore() {
 				.concat(placesMiddleware)
 				.concat(categoriesMiddleware)
 				.concat(mapMiddleware)
-				.concat(geoMiddleware),
+				.concat(geoMiddleware)
+				.concat(geoSearchMiddleware),
 	});
 }
 const store = setupStore();

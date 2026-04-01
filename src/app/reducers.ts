@@ -15,6 +15,8 @@ import {
 import {
 	geoReducer,
 	geoReducerPath,
+	geoSearchPath,
+	geoSearchReducer,
 	mapFeedbackReducer,
 	mapFeedbackReducerPath,
 	mapReducer,
@@ -30,4 +32,5 @@ export const rootReducer = combineReducers({
 	[mapReducerPath]: mapReducer,
 	[geoReducerPath]: geoReducer,
 	[mapFeedbackReducerPath]: mapFeedbackReducer,
+	[geoSearchPath]: geoSearchReducer,
 });

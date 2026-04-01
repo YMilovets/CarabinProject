@@ -151,3 +151,19 @@ export type DependentLocality = {
 export type YandexGeocodeResponse = {
 	response: DataResponse;
 };
+
+export interface DadataResponseType {
+	suggestions: DadataSuggestion[];
+}
+
+export interface DadataSuggestion {
+	value: string;
+	unrestricted_value: string;
+	data: DadataAddressData;
+}
+
+export interface DadataAddressData {
+	geo_lat: string | null;
+	geo_lon: string | null;
+	region_fias_id: string;
+}

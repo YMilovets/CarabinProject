@@ -21,4 +21,6 @@ export {
 	mapFeedbackReducerPath,
 	setAddress,
 	setMapCoords,
+	setTimestamp,
+	setZoom,
 } from "./model";

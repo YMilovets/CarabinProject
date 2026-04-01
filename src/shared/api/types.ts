@@ -10,10 +10,6 @@ export type PlacesResponse = {
 	category: string;
 	address: string;
 	coords: { lat: number; long: number };
-	image: {
-		url: string;
-		alt?: string;
-	};
 	description: string;
 	isPublished: boolean;
 	date: string;

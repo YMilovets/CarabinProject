@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarMonth } from "@mui/icons-material";
+import { CalendarMonth, FmdGood } from "@mui/icons-material";
 import {
 	Box,
 	Card,
@@ -7,6 +7,7 @@ import {
 	CardContent,
 	CardMedia,
 	Chip,
+	Divider,
 	Grid,
 	Typography,
 } from "@mui/material";
@@ -18,18 +19,18 @@ import { PlacesCardProps } from "./types";
 
 function PlacesCard({
 	description,
-	title,
 	date,
 	url,
 	alt,
 	category,
 	moreBtnComponent,
+	address,
 }: PlacesCardProps) {
 	return (
 		<Grid size={LibraryGridPos}>
 			<Card sx={{ display: "grid", height: "100%" }}>
 				{url && (
-					<CardMedia title={title}>
+					<CardMedia title={address}>
 						<Image
 							alt={alt ?? ""}
 							src={url}
@@ -50,21 +51,33 @@ function PlacesCard({
 						gap: 1,
 					}}
 				>
-					<Typography variant="body2">{description}</Typography>
-					<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+					<Typography variant="body1">{description}</Typography>
+					<Typography sx={{ display: "flex", gap: 0.5 }} variant="body2">
+						<FmdGood fontSize="small" color="primary" />
+						{address}
+					</Typography>
+				</CardContent>
+				<Box sx={{ marginTop: "auto" }}>
+					<CardContent
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+						}}
+					>
 						{category && <Chip sx={{ borderRadius: 1 }} label={category} />}
 						<Chip
 							sx={{ borderRadius: 1 }}
 							icon={<CalendarMonth sx={{ width: 16 }} />}
 							label={date}
 						/>
-					</Box>
-				</CardContent>
-				{moreBtnComponent && (
-					<CardActions sx={{ marginTop: "auto" }}>
-						{moreBtnComponent}
-					</CardActions>
-				)}
+					</CardContent>
+					{moreBtnComponent && (
+						<>
+							<Divider />
+							<CardActions>{moreBtnComponent}</CardActions>
+						</>
+					)}
+				</Box>
 			</Card>
 		</Grid>
 	);

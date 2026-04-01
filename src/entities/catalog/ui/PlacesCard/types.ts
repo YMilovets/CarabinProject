@@ -8,4 +8,5 @@ export interface PlacesCardProps {
 	category?: string;
 	description: string;
 	moreBtnComponent?: ReactNode;
+	address: string;
 }

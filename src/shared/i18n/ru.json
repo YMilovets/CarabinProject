@@ -36,6 +36,7 @@
 		"selectedAddress": "Выбранный адрес",
 		"unauthorized": "Пожалуйста, авторизуйтесь, чтобы иметь доступ к API-методу",
 		"tooltip": "Широта: {lat}, долгота: {lng}",
+		"descriptionHelperText": "Допустимое количество символов: {count}",
 		"search": "Поиск города или региона"
 	},
 	"notFoundPage": {

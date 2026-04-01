@@ -1,11 +1,11 @@
 import React from "react";
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { getMessages } from "next-intl/server";
 
 import { Metadata } from "next";
 
-import { containerStyle } from "./constants";
 import FeedbackForm from "./FeedbackForm";
+import FormControl from "./FormControl";
 
 import styles from "./Feedback.module.css";
 
@@ -16,24 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
 		title: messages.feedbackPage.title,
 	};
 }
-
-const handleSubmit = async (formData: FormData) => {
-	"use server";
-	console.log(formData);
-};
-
 async function Feedback() {
 	return (
 		<section className={styles.root}>
 			<Box>
-				<Paper
-					action={handleSubmit}
-					component="form"
-					sx={containerStyle}
-					variant="elevation"
-				>
-					<FeedbackForm />
-				</Paper>
+				<FeedbackForm>
+					<FormControl />
+				</FeedbackForm>
 			</Box>
 		</section>
 	);

@@ -1,42 +1,18 @@
-import React from "react";
+"use client";
+
 import SendIcon from "@mui/icons-material/Send";
-import {
-	Alert,
-	AlertTitle,
-	Button,
-	TextField,
-	Typography,
-} from "@mui/material";
-import { getTranslations } from "next-intl/server";
+import { Button, Paper } from "@mui/material";
+import { useTranslations } from "next-intl";
 
-import { YandexMap } from "@/src/features/feedback";
+import { containerStyle } from "../constants";
 
-async function FeedbackForm() {
-	const t = await getTranslations("feedbackPage");
+import { FeedbackFormProps } from "./types";
 
+function FeedbackForm({ children }: FeedbackFormProps) {
+	const t = useTranslations("feedbackPage");
 	return (
-		<>
-			<Typography variant="h6">{t("formTitle")}</Typography>
-			<TextField label={t("objectCategory")} name="category" />
-			<TextField
-				multiline
-				rows={3}
-				label={t("description")}
-				name="description"
-			/>
-			<YandexMap
-				titleComponent={<Typography variant="body1">{t("mapInfo")}</Typography>}
-				errorComponent={
-					<Alert
-						severity="error"
-						variant="outlined"
-						sx={{ alignItems: "center" }}
-					>
-						<AlertTitle>{t("error")}</AlertTitle>
-						{t("errorMessage")}
-					</Alert>
-				}
-			/>
+		<Paper component="form" sx={containerStyle} variant="elevation">
+			{children}
 			<Button
 				sx={{ borderRadius: 2 }}
 				endIcon={<SendIcon />}
@@ -46,7 +22,7 @@ async function FeedbackForm() {
 			>
 				{t("submit")}
 			</Button>
-		</>
+		</Paper>
 	);
 }
 

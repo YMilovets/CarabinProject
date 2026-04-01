@@ -152,6 +152,14 @@ export type YandexGeocodeResponse = {
 	response: DataResponse;
 };
 
+export type SendPlaceType = {
+	category: string;
+	description?: string;
+	address: string;
+	lat: string | number;
+	long: string | number;
+};
+
 export interface DadataResponseType {
 	suggestions: DadataSuggestion[];
 }

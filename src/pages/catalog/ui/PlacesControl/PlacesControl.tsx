@@ -14,9 +14,11 @@ function PlacesControl({ children }: PlacesControlProps) {
 					position: "sticky",
 					display: "grid",
 					padding: theme.breakpoints.down("xs")
-						? "calc(3.5em + 60px) 0 2em"
-						: "7.5em 0 2em",
+						? "calc(3.5em + 60px) 3px 2em"
+						: "7.5em 3px 2em",
 					background: theme.palette.background.default,
+					zIndex: 1,
+					margin: "0 -3px",
 				};
 			}}
 		>

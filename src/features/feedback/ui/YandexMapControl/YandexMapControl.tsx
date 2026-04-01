@@ -1,15 +1,23 @@
 import React from "react";
-import { FmdGood } from "@mui/icons-material";
-import { Paper, Tooltip } from "@mui/material";
+import { Paper } from "@mui/material";
 import {
+	MapEventUpdateHandler,
 	YMapLocationRequest,
 	YMapMarkerEventHandler,
 } from "@yandex/ymaps3-types";
+import { useDebounce } from "rooks";
 
 import { useAppDispatch, useAppSelector } from "@/src/app/hooks";
-import { setMapCoords, useGetGeoDataMutation } from "@/src/entities/feedback";
+import {
+	setMapCoords,
+	setZoom,
+	useGetGeoDataMutation,
+} from "@/src/entities/feedback";
+import { useTheme } from "@/src/shared/hooks";
 
-import { FRACTION_DIGIT, ZOOM } from "./constants";
+import { DEBOUNCE_TIME } from "../../config";
+import YandexMarker from "../YandexMarker";
+
 import { YandexMapControlProps } from "./types";
 
 function YandexMapControl({ reactify }: YandexMapControlProps) {
@@ -17,11 +25,15 @@ function YandexMapControl({ reactify }: YandexMapControlProps) {
 
 	const [triggerReplace] = useGetGeoDataMutation();
 	const [lng, lat] = useAppSelector((state) => state.mapReducer.coords);
+	const zoom = useAppSelector((state) => state.mapReducer.zoom);
+	const timestamp = useAppSelector((state) => state.mapReducer.timestamp);
+
 	const location: YMapLocationRequest = {
 		center: [lng, lat],
-		zoom: ZOOM,
+		zoom,
 	};
 	const dispatch = useAppDispatch();
+	const { isDarkMode } = useTheme();
 
 	const { center } = { ...location };
 
@@ -29,6 +41,11 @@ function YandexMapControl({ reactify }: YandexMapControlProps) {
 		triggerReplace({ lng: lngCoord, lat: latCoord });
 		dispatch(setMapCoords([lngCoord, latCoord]));
 	};
+
+	const handleZoom: MapEventUpdateHandler = useDebounce(
+		({ location: newLocation }) => dispatch(setZoom(newLocation.zoom)),
+		DEBOUNCE_TIME,
+	);
 
 	if (!components) return null;
 	const {
@@ -43,25 +60,19 @@ function YandexMapControl({ reactify }: YandexMapControlProps) {
 
 	return (
 		<Paper sx={{ minHeight: "18rem", borderRadius: 0.75, overflow: "hidden" }}>
-			<YMap location={reactify?.useDefault(location) ?? location}>
+			<YMap
+				theme={isDarkMode ? "dark" : "light"}
+				location={reactify?.useDefault(location, [timestamp]) ?? location}
+			>
 				<YMapDefaultSchemeLayer />
 				<YMapDefaultFeaturesLayer />
+
 				<YMapListener
+					onUpdate={handleZoom}
 					onClick={(_, { coordinates }) => handleDragEnd(coordinates)}
 				/>
-				<YMapMarker
-					onDragEnd={handleDragEnd}
-					draggable
-					coordinates={center}
-					mapFollowsOnDrag
-				>
-					<Tooltip
-						title={`Широта: ${lat.toFixed(
-							FRACTION_DIGIT,
-						)}, долгота: ${lng.toFixed(FRACTION_DIGIT)}`}
-					>
-						<FmdGood fontSize="large" color="error" />
-					</Tooltip>
+				<YMapMarker onDragEnd={handleDragEnd} draggable coordinates={center}>
+					<YandexMarker />
 				</YMapMarker>
 			</YMap>
 		</Paper>

@@ -1,4 +1,5 @@
 import { FindCursor, ObjectId, WithId } from "mongodb";
+import { User } from "next-auth";
 
 export type Response<TBody> = {
 	data: TBody;
@@ -175,3 +176,8 @@ export interface DadataAddressData {
 	geo_lon: string | null;
 	region_fias_id: string;
 }
+
+export type UserRowType = User & {
+	password_hash: string;
+	_id: string;
+};

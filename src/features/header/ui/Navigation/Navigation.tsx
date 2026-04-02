@@ -1,12 +1,15 @@
 import React from "react";
 import { Box } from "@mui/material";
+import { getTranslations } from "next-intl/server";
+
+import { Pages, SessionObserver } from "@/src/shared";
 
 import getRoutes from "../../utils";
 import ButtonLink from "../ButtonLink";
-import SignButton from "../SignButton";
 
 async function Navigation() {
 	const routes = await getRoutes();
+	const t = await getTranslations("loginPage");
 
 	return (
 		<Box>
@@ -17,7 +20,9 @@ async function Navigation() {
 					</ButtonLink>
 				);
 			})}
-			<SignButton />
+			<SessionObserver>
+				<ButtonLink path={Pages.Login}>{t("title")}</ButtonLink>
+			</SessionObserver>
 		</Box>
 	);
 }

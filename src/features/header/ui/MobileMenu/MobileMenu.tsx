@@ -6,39 +6,18 @@ import { Divider, IconButton, MenuItem } from "@mui/material";
 import { useTranslations } from "next-intl";
 
 import { ThemeControl } from "@/src/features/main";
-import { Menu } from "@/src/shared";
-import { useMenu, useMobile, useProfileId } from "@/src/shared/hooks";
+import { DisplayObserver, Menu } from "@/src/shared";
+import { useMenu, useProfileId } from "@/src/shared/hooks";
 
 import MenuItems from "../MenuItems";
 
 import styles from "./MobileMenu.module.css";
 
 function MobileMenu() {
-	const isMobile = useMobile(500);
-
 	const t = useTranslations("common");
 
 	const { anchorEl, isOpen, onClick, onClose } = useMenu();
 	const { buttonId, menuId } = useProfileId();
-
-	const isDisplayDivider = !!isMobile;
-
-	const menuItems = [];
-
-	if (isMobile) {
-		menuItems.push(
-			<MenuItem key="theme">
-				{t("themeMenu")}
-				<ThemeControl />
-			</MenuItem>,
-		);
-	}
-
-	if (isDisplayDivider) {
-		menuItems.push(<Divider key="divider" />);
-	}
-
-	menuItems.push(<MenuItems key="menu" onClose={onClose} />);
 
 	return (
 		<Menu
@@ -58,7 +37,16 @@ function MobileMenu() {
 			)}
 			anchorEl={anchorEl}
 			isOpen={isOpen}
-			menuChildren={menuItems}
+			menuChildren={[
+				<DisplayObserver isMobileMode={false} width={500} key="mobile">
+					<MenuItem key="theme">
+						{t("themeMenu")}
+						<ThemeControl />
+					</MenuItem>
+					<Divider key="divider" />
+				</DisplayObserver>,
+				<MenuItems key="menu" onClose={onClose} />,
+			]}
 			onClose={onClose}
 			menuId={menuId}
 			buttonId={buttonId}

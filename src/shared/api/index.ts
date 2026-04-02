@@ -1,3 +1,4 @@
+export { default as getAuthorization } from "./auth";
 export { PLACES_DB } from "./constants";
 export { default as getGeoData } from "./getGeoData";
 export { default as getMapSDK } from "./getMapSDK";

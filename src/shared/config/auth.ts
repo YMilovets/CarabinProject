@@ -1,7 +1,7 @@
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-import { getAuthorization } from "@/src/features/login/api";
+import { getAuthorization } from "../api";
 
 export const authConfig: AuthOptions = {
 	providers: [

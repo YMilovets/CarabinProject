@@ -2,12 +2,9 @@
 
 import { alpha, AppBar } from "@mui/material";
 
-import { useTheme } from "@/src/shared/hooks";
-
 import { ToolbarProps } from "./types";
 
 function Toolbar({ children, ...props }: ToolbarProps) {
-	const { isDarkMode } = useTheme();
 	return (
 		<AppBar
 			{...props}
@@ -19,7 +16,8 @@ function Toolbar({ children, ...props }: ToolbarProps) {
 				borderWidth: 0,
 				borderBottom: 1,
 				borderStyle: "solid",
-				borderColor: (theme) => theme.palette.grey[isDarkMode ? 800 : 300],
+				borderColor: (theme) =>
+					theme.palette.grey[theme.palette.mode === "dark" ? 800 : 300],
 				pl: "3.75em",
 				pr: "3.75em",
 			}}

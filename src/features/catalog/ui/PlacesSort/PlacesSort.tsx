@@ -1,95 +1,27 @@
-"use client";
+import React from "react";
+import { FormControl, MenuItem, Paper } from "@mui/material";
+import { getTranslations } from "next-intl/server";
 
-import React, { ReactNode } from "react";
-import {
-	ArrowDownward,
-	ArrowUpward,
-	FormatAlignJustify,
-} from "@mui/icons-material";
-import {
-	Button,
-	FormControl,
-	InputLabel,
-	MenuItem,
-	Paper,
-	Select,
-	SelectChangeEvent,
-} from "@mui/material";
-import { useTranslations } from "next-intl";
+import PlacesSelect from "../PlacesSelect";
+import PlacesSortMode from "../PlacesSortMode";
 
-import { useGetPlacesQuery } from "@/src/entities/catalog";
-import { useProfileId } from "@/src/shared/hooks";
-import { SortOrder } from "@/src/shared/types";
-
-import { useCatalogParams } from "../../hooks";
-
-function PlacesSort() {
-	const {
-		sortAt,
-		sortBy,
-		handleSortAtQuery,
-		handleSortByQuery,
-		params,
-		selectedCategories,
-	} = useCatalogParams();
-	const { isError } = useGetPlacesQuery(Object.fromEntries(params), {
-		skip: Object.keys(selectedCategories).length === 0,
-	});
-
-	const { menuId } = useProfileId("menu");
-	const t = useTranslations("catalogPage");
-
-	const isDisplayOrder = !sortBy || isError;
-
-	const handleChange = (event: SelectChangeEvent) => {
-		if (isError) return;
-		handleSortByQuery(event.target.value);
-		handleSortAtQuery(SortOrder.Asc);
-	};
-
-	const handleOrderChange = (order: number) => {
-		if (isDisplayOrder) return;
-		handleSortAtQuery(order);
-	};
-
-	const SortedIcon: Record<number, { icon: ReactNode; title: string }> = {
-		[SortOrder.Desc]: { icon: <ArrowUpward />, title: t("desc") },
-		[SortOrder.Default]: { icon: <FormatAlignJustify />, title: t("none") },
-		[SortOrder.Asc]: { icon: <ArrowDownward />, title: t("asc") },
-	};
-
-	const order = sortAt >= SortOrder.Asc ? SortOrder.Desc : SortOrder.Asc;
+async function PlacesSort() {
+	const t = await getTranslations("catalogPage");
 
 	return (
 		<>
 			<FormControl>
 				<Paper sx={{ display: "flex" }}>
-					<InputLabel id={menuId}>{t("sortBy")}</InputLabel>
-					<Select
-						value={sortBy}
-						labelId={menuId}
-						label={t("sortBy")}
-						onChange={handleChange}
-						sx={{ flex: 1, minWidth: "8em" }}
-						disabled={isError}
-					>
+					<PlacesSelect>
 						<MenuItem value="">{t("none")}</MenuItem>
 						<MenuItem value="date">{t("dateBy")}</MenuItem>
 						<MenuItem value="category">{t("categoryBy")}</MenuItem>
-					</Select>
+					</PlacesSelect>
 				</Paper>
 			</FormControl>
 			<FormControl sx={{ display: "flex" }}>
 				<Paper sx={{ display: "flex", flex: 1 }}>
-					<Button
-						disabled={isDisplayOrder}
-						onClick={() => handleOrderChange(order)}
-						variant="outlined"
-						title={SortedIcon[sortAt].title}
-						sx={{ minWidth: "auto" }}
-					>
-						{SortedIcon[sortAt].icon}
-					</Button>
+					<PlacesSortMode />
 				</Paper>
 			</FormControl>
 		</>

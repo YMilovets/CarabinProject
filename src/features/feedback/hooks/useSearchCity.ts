@@ -9,6 +9,7 @@ import { useDebounce } from "rooks";
 import { useAppDispatch } from "@/src/app/hooks";
 import {
 	setMapCoords,
+	setTimestamp,
 	useGetGeoDataMutation,
 	useGetGeoPositionSearchMutation,
 } from "@/src/entities/feedback";
@@ -50,10 +51,15 @@ export default function useSearchCity() {
 		handleDebounceRequest(e.target.value);
 	};
 
+	const handleSearchChange = () => {
+		dispatch(setTimestamp(Date.now()));
+	};
+
 	return {
 		search,
 		searchedData,
 		handleChange,
 		handleOptionClick,
+		handleSearchChange,
 	};
 }

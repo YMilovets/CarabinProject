@@ -1,31 +1,21 @@
-"use client";
+"use server";
 
-import React, { useState } from "react";
-import { CircularProgress } from "@mui/material";
+import React from "react";
 
-import { useGetMapQuery } from "@/src/entities/feedback";
+import { YMapProvider } from "@/src/shared";
 
-import GeoSearch from "../GeoSearch";
 import YandexMapControl from "../YandexMapControl";
 import YandexScript from "../YandexScript";
 
-import { SDKType, YandexMapProps } from "./types";
+import { YandexMapProps } from "./types";
 
-function YandexMap({ titleComponent, errorComponent }: YandexMapProps) {
-	const [sdk, setSdk] = useState<SDKType>();
-	const { isLoading, isSuccess, isError } = useGetMapQuery();
-
-	const { reactify } = { ...sdk };
-
+function YandexMap({ children }: YandexMapProps) {
 	return (
-		<>
-			{isSuccess && titleComponent}
-			{isError && errorComponent}
-			<YandexScript onLoad={setSdk} />
-			{isLoading && <CircularProgress key="loader" />}
-			{isSuccess && <GeoSearch />}
-			<YandexMapControl reactify={reactify} />
-		</>
+		<YMapProvider>
+			{children}
+			<YandexScript />
+			<YandexMapControl />
+		</YMapProvider>
 	);
 }
 

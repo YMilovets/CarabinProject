@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { use } from "react";
 import { Paper } from "@mui/material";
 import {
 	MapEventUpdateHandler,
@@ -13,14 +15,15 @@ import {
 	setZoom,
 	useGetGeoDataMutation,
 } from "@/src/entities/feedback";
+import { YMapContext } from "@/src/shared";
 import { useTheme } from "@/src/shared/hooks";
 
 import { DEBOUNCE_TIME } from "../../config";
 import YandexMarker from "../YandexMarker";
 
-import { YandexMapControlProps } from "./types";
+function YandexMapControl() {
+	const reactify = use(YMapContext);
 
-function YandexMapControl({ reactify }: YandexMapControlProps) {
 	const components = reactify?.module(ymaps3);
 
 	const [triggerReplace] = useGetGeoDataMutation();

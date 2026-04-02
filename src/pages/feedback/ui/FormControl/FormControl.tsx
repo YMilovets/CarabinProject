@@ -1,9 +1,16 @@
 import React from "react";
-import { Alert, AlertTitle, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 
-import { Address, YandexMap } from "@/src/features/feedback";
-import LatLong from "@/src/features/feedback/ui/LatLong";
+import {
+	Address,
+	AlertError,
+	CategoryField,
+	GeoSearch,
+	LatLong,
+	Loader,
+	YandexMap,
+} from "@/src/features/feedback";
 
 const COUNT = 200;
 
@@ -13,7 +20,7 @@ async function FeedbackFormControl() {
 	return (
 		<>
 			<Typography variant="h6">{t("formTitle")}</Typography>
-			<TextField label={t("objectCategory")} name="category" />
+			<CategoryField />
 			<TextField
 				multiline
 				rows={3}
@@ -24,19 +31,12 @@ async function FeedbackFormControl() {
 			/>
 			<Address />
 			<LatLong />
-			<YandexMap
-				titleComponent={<Typography variant="body1">{t("mapInfo")}</Typography>}
-				errorComponent={
-					<Alert
-						severity="error"
-						variant="outlined"
-						sx={{ alignItems: "center" }}
-					>
-						<AlertTitle>{t("error")}</AlertTitle>
-						{t("errorMessage")}
-					</Alert>
-				}
-			/>
+
+			<Loader />
+			<AlertError />
+			<YandexMap>
+				<GeoSearch />
+			</YandexMap>
 		</>
 	);
 }

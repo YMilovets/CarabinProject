@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
+"use client";
+
+import React, { use, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import Script from "next/script";
 
 import { useGetMapQuery } from "@/src/entities/feedback";
+import { YMapControlContext } from "@/src/shared";
 
 import { YandexScriptsProps } from "./types";
 
-function YandexScript({ onLoad, onError }: YandexScriptsProps) {
+function YandexScript({ onError }: YandexScriptsProps) {
 	const { data, isSuccess } = useGetMapQuery();
 	const { data: code } = { ...data };
+
+	const onLoad = use(YMapControlContext);
 
 	const handleLoad = async () => {
 		try {
@@ -20,7 +25,7 @@ function YandexScript({ onLoad, onError }: YandexScriptsProps) {
 
 			const reactify = ymaps3React.reactify.bindTo(React, ReactDOM);
 
-			onLoad({ reactify, ymaps3 });
+			onLoad(reactify);
 		} catch (error) {
 			onError?.((error as Error).message);
 		}

@@ -161,6 +161,14 @@ export type SendPlaceType = {
 	long: string | number;
 };
 
+export type UserType = {
+	name: string;
+	email: string;
+	password: string;
+	image?: string;
+	role?: "admin" | "user";
+};
+
 export interface DadataResponseType {
 	suggestions: DadataSuggestion[];
 }

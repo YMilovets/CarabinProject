@@ -2,7 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 
-import { Response } from "@/src/shared/api";
+import { createNewUser, Response } from "@/src/shared/api";
 
 import { MAX_HEIGHT_PASSWORD } from "./constants";
 
@@ -38,6 +38,12 @@ export async function handleSubmit(
 		if (!email?.toString().trim()) {
 			throw new Error(t("errorUserEmail"));
 		}
+
+		await createNewUser({
+			email: email.toString().trim(),
+			name: name.toString().trim(),
+			password: password.toString(),
+		});
 
 		return { error: null, data: t("successAccountMessage") };
 	} catch (error) {

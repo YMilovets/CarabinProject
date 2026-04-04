@@ -8,6 +8,7 @@ export { default as postAddressSearch } from "./postAddressSearch";
 export { default as postPlace } from "./postPlace";
 export { default as postPlacesFromDB } from "./postPlacesFromDB";
 export { default as sendNewPlace } from "./sendNewPlace";
+export { default as createNewUser } from "./signup";
 export type {
 	DadataAddressData,
 	DadataSuggestion,

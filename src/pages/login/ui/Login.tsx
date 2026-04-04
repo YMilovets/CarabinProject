@@ -5,11 +5,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 
 import { Metadata } from "next";
 
-import {
-	RedirectObserver,
-	SignForm,
-	SignFormControl,
-} from "@/src/features/login";
+import { SignForm, SignFormControl } from "@/src/features/login";
+import { RedirectObserver } from "@/src/shared";
 import { ProfileRoute } from "@/src/shared/config";
 
 import styles from "./Login.module.css";

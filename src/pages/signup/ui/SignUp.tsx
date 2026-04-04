@@ -4,9 +4,8 @@ import { getMessages } from "next-intl/server";
 
 import { Metadata } from "next";
 
-import { RedirectObserver } from "@/src/features/login";
 import { SignUpForm, SignUpFormControl } from "@/src/features/signup";
-import { ProfileRoute } from "@/src/shared";
+import { ProfileRoute, RedirectObserver } from "@/src/shared";
 
 import styles from "./SignUp.module.css";
 

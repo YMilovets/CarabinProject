@@ -167,6 +167,7 @@ export type UserType = {
 	password: string;
 	image?: string;
 	role?: "admin" | "user";
+	token: string;
 };
 
 export interface DadataResponseType {
@@ -189,3 +190,18 @@ export type UserRowType = User & {
 	password_hash: string;
 	_id: string;
 };
+
+type BaseRecaptchaSuccessResponseType = {
+	hostname: string;
+	score: number;
+	action: string;
+};
+
+export type RecaptchaResponseType<T extends boolean = boolean> = T extends true
+	? {
+			success: T;
+	  } & BaseRecaptchaSuccessResponseType
+	: {
+			success: T;
+			"error-codes": Array<string>;
+	  };

@@ -15,6 +15,7 @@ export async function handleSubmit(
 	const email = formData.get("email");
 	const password = formData.get("password");
 	const repeatPassword = formData.get("repeatPassword");
+	const token = formData.get("token");
 
 	try {
 		if (password !== repeatPassword) {
@@ -39,10 +40,17 @@ export async function handleSubmit(
 			throw new Error(t("errorUserEmail"));
 		}
 
+		if (!token) {
+			throw new Error(
+				t("errorRecapthaCode", { email: process.env.NEXT_PUBLIC_EMAIL ?? "" }),
+			);
+		}
+
 		await createNewUser({
 			email: email.toString().trim(),
 			name: name.toString().trim(),
 			password: password.toString(),
+			token: token.toString(),
 		});
 
 		return { error: null, data: t("successAccountMessage") };

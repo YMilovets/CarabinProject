@@ -12,12 +12,17 @@ import { AlertCard, Form, Pages } from "@/src/shared";
 import { handleSubmit } from "./actions";
 import { initialState, MILLISECONDS, TIME_REDIRECT, WAIT } from "./constants";
 import { SignUpFormProps } from "./types";
+import { getRecaptchaToken } from "./utils";
 
 function SignUpForm({ children }: SignUpFormProps) {
 	const t = useTranslations("signupPage");
 
 	const handleSignIn = async (_: unknown, formData: FormData) => {
 		try {
+			const token = await getRecaptchaToken();
+
+			formData.set("token", token);
+
 			return await handleSubmit(formData);
 		} catch (error) {
 			return { error: (error as Error).message, data: null };

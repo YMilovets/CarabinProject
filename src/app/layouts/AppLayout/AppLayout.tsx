@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 
 import { Header } from "@/src/widgets/header";
 
@@ -42,9 +43,19 @@ async function AppLayout({ children }: LayoutProps<"/">) {
 	const messages = await getMessages();
 	const locale = await getLocale();
 
+	const recaptchaAPI = process.env.NEXT_PUBLIC_RECAPTCHA_SCRIPT;
+	const recaptchaURL = new URL(recaptchaAPI ?? "");
+	recaptchaURL.searchParams.append(
+		"render",
+		process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "",
+	);
+
 	return (
 		<html lang={locale}>
 			<body className={`${geistSans.variable} ${geistMono.variable}`}>
+				{recaptchaAPI && (
+					<Script strategy="beforeInteractive" src={recaptchaURL.toString()} />
+				)}
 				<NextIntlClientProvider messages={messages}>
 					<ProfileProvider>
 						<AppRouterCacheProvider options={{ enableCssLayer: true }}>

@@ -7,7 +7,7 @@ import { NextRequest } from "next/server";
 import { authConfig } from "../config";
 import { getHeaders } from "../utils";
 
-import { FetchResponseType, Status } from "./types";
+import { FetchResponseType, RecaptchaResponseType, Status } from "./types";
 
 export function fetchResponse<TResponse>({
 	data = null,
@@ -24,4 +24,22 @@ export async function isDeniedAccess(request: NextRequest) {
 	const isDebug = token && process.env.NODE_ENV === "development";
 
 	return !session && !isDebug;
+}
+
+export async function verifyRecaptchaToken(token: string) {
+	const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+
+	if (!secretKey) {
+		throw new Error("Secret key not found");
+	}
+
+	const recaptchaAPI = process.env.NEXT_PUBLIC_RECAPTCHA_API ?? "";
+	const url = new URL(recaptchaAPI);
+	url.searchParams.append("secret", secretKey);
+	url.searchParams.append("response", token);
+
+	const response = await fetch(url, { method: "POST" });
+	const recaptchaData: RecaptchaResponseType = await response.json();
+
+	return recaptchaData;
 }

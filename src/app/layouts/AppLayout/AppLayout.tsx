@@ -9,18 +9,18 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/src/widgets/header";
 
 import { ProfileProvider, ReduxProvider, ThemeProvider } from "../../providers";
-import MainLayout from "../MainLayout/MainLayout";
+import MainLayout from "../MainLayout";
 
 import "../../styles";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
-	subsets: ["latin"],
+	subsets: ["cyrillic"],
 });
 
 const geistMono = Geist_Mono({
 	variable: "--font-geist-mono",
-	subsets: ["latin"],
+	subsets: ["cyrillic"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

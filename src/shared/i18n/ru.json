@@ -6,7 +6,7 @@
 		"formTitle": "Войти в систему",
 		"title": "Войти",
 		"buttonTitle": "Отправить",
-		"CredentialsSignin": "Пользователь не найден!"
+		"CredentialsSignin": "Пользователя не существует!"
 	},
 	"catalogPage": {
 		"title": "Каталог мест",

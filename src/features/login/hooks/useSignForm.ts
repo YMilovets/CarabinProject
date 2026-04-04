@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -7,6 +8,7 @@ import { ProfileRoute } from "@/src/shared";
 
 export default function useSignForm() {
 	const searchParams = useSearchParams();
+	const t = useTranslations("loginPage");
 	const router = useRouter();
 
 	const [errorStatus, setErrorStatus] = useState<string | null | undefined>(
@@ -28,7 +30,9 @@ export default function useSignForm() {
 			return;
 		}
 
-		setErrorStatus(result?.error);
+		if (result?.error) {
+			setErrorStatus(t(result.error));
+		}
 	};
 
 	return {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Theme } from "@emotion/react";
 import { Box, Paper, SxProps, Typography } from "@mui/material";
 import { getMessages, getTranslations } from "next-intl/server";
@@ -19,6 +19,8 @@ const containerStyle: SxProps<Theme> = {
 	display: "grid",
 	gap: 2,
 	padding: 2.5,
+	margin: 2,
+	maxWidth: "17.5rem",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,16 +36,18 @@ async function Login() {
 
 	return (
 		<section className={styles.root}>
-			<RedirectObserver to={ProfileRoute}>
-				<Box>
-					<Paper sx={containerStyle} variant="elevation">
-						<Typography variant="h6">{t("formTitle")}</Typography>
-						<SignForm>
-							<SignFormControl />
-						</SignForm>
-					</Paper>
-				</Box>
-			</RedirectObserver>
+			<Suspense>
+				<RedirectObserver to={ProfileRoute}>
+					<Box>
+						<Paper sx={containerStyle} variant="elevation">
+							<Typography variant="h6">{t("formTitle")}</Typography>
+							<SignForm>
+								<SignFormControl />
+							</SignForm>
+						</Paper>
+					</Box>
+				</RedirectObserver>
+			</Suspense>
 		</section>
 	);
 }

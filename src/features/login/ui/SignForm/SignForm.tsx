@@ -1,18 +1,15 @@
 "use client";
 
 import React, { SubmitEventHandler } from "react";
-import { Alert } from "@mui/material";
-import { useTranslations } from "next-intl";
+
+import { Form } from "@/src/shared";
 
 import { useSignForm } from "../../hooks";
 
 import { SignFormProps } from "./types";
 
-import styles from "./SignForm.module.css";
-
 function SignForm({ children, ...props }: SignFormProps) {
 	const { onSubmit, errorStatus } = useSignForm();
-	const t = useTranslations("loginPage");
 
 	const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
@@ -24,14 +21,9 @@ function SignForm({ children, ...props }: SignFormProps) {
 	};
 
 	return (
-		<form {...props} onSubmit={handleSubmit} className={styles.form}>
+		<Form {...props} errorStatus={errorStatus} onSubmit={handleSubmit}>
 			{children}
-			{errorStatus ? (
-				<Alert variant="outlined" severity="error">
-					{t(errorStatus)}
-				</Alert>
-			) : null}
-		</form>
+		</Form>
 	);
 }
 

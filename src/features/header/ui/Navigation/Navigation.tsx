@@ -10,6 +10,7 @@ import ButtonLink from "../ButtonLink";
 async function Navigation() {
 	const routes = await getRoutes();
 	const t = await getTranslations("loginPage");
+	const sT = await getTranslations("signupPage");
 
 	return (
 		<Box>
@@ -22,6 +23,7 @@ async function Navigation() {
 			})}
 			<SessionObserver>
 				<ButtonLink path={Pages.Login}>{t("title")}</ButtonLink>
+				<ButtonLink path={Pages.SignUp}>{sT("title")}</ButtonLink>
 			</SessionObserver>
 		</Box>
 	);

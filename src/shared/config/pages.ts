@@ -4,6 +4,7 @@ export enum Pages {
 	Catalog = "catalog",
 	Login = "login",
 	Feedback = "feedback",
+	SignUp = "signup",
 }
 
 export const ProfileRoute = "/profile";

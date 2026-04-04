@@ -15,7 +15,10 @@ function MenuItems({ onClose, ...props }: MenuItemsProps) {
 	const routes = useRoutes();
 	const pathname = usePathname();
 	const t = useTranslations("loginPage");
+	const sT = useTranslations("signupPage");
+
 	const isLoginPage = pathname?.replace("/", "") === Pages.Login;
+	const iSignUpPage = pathname?.replace("/", "") === Pages.SignUp;
 
 	return (
 		<>
@@ -43,6 +46,15 @@ function MenuItems({ onClose, ...props }: MenuItemsProps) {
 					component={Link}
 				>
 					{t("title")}
+				</MenuItem>
+				<MenuItem
+					{...props}
+					onClick={onClose}
+					selected={iSignUpPage}
+					href={Pages.SignUp}
+					component={Link}
+				>
+					{sT("title")}
 				</MenuItem>
 			</SessionObserver>
 		</>

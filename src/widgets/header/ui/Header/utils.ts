@@ -8,6 +8,7 @@ export async function getPages(): Promise<Array<PageType>> {
 		[Pages.Catalog]: messages.catalogPage.title,
 		[Pages.Feedback]: messages.feedbackPage.title,
 		[Pages.Login]: messages.loginPage.title,
+		[Pages.SignUp]: messages.signupPage.title,
 	};
 
 	return PagesList.map(({ id, path }) => ({

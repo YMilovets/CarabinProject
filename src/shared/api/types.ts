@@ -8,13 +8,12 @@ export type Response<TBody> = {
 
 export type PlacesResponse = {
 	_id: ObjectId;
-	category: string;
-	address: string;
 	coords: { lat: number; long: number };
-	description: string;
 	isPublished: boolean;
 	date: string;
-} & Document;
+	author?: string;
+} & Omit<SendPlaceType, "lat" | "long"> &
+	Document;
 
 export type CategoriesResponse = {
 	_id: string;

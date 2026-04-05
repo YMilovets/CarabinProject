@@ -43,6 +43,7 @@ function PlacesCatalog() {
 							date,
 							coords: { lat, long },
 							address,
+							author,
 						}) => (
 							<PlacesCard
 								key={_id.toString()}
@@ -54,6 +55,7 @@ function PlacesCatalog() {
 								date={formatDate(date)}
 								address={address}
 								moreBtnComponent={<Button>{cT("view")}</Button>}
+								author={author}
 							/>
 						),
 					)}

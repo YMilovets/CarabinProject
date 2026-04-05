@@ -9,21 +9,23 @@ export default function getStaticYandexImageURL(
 	long: number,
 	isDarkMode: boolean,
 ) {
-	const params = new URLSearchParams();
+	const baseURL = process.env.NEXT_PUBLIC_YNDX_MAPS_STATIC_API_URL ?? "";
+	const imageURL = new URL(baseURL);
 
-	params.append("ll", `${lat},${long}`);
-	params.append("size", `${STATIC_MAP_WIDTH},${STATIC_MAP_HEIGHT}`);
-	params.append("z", STATIC_MAP_ZOOM.toString());
-	params.append("pt", `${lat},${long},pm2rdm`);
-	params.append(
+	imageURL.searchParams.append("ll", `${lat},${long}`);
+	imageURL.searchParams.append(
+		"size",
+		`${STATIC_MAP_WIDTH},${STATIC_MAP_HEIGHT}`,
+	);
+	imageURL.searchParams.append("z", STATIC_MAP_ZOOM.toString());
+	imageURL.searchParams.append("pt", `${lat},${long},pm2rdm`);
+	imageURL.searchParams.append(
 		"apikey",
 		process.env.NEXT_PUBLIC_YNDX_MAPS_STATIC_API_KEY ?? "",
 	);
 	if (isDarkMode) {
-		params.append("theme", `dark`);
+		imageURL.searchParams.append("theme", `dark`);
 	}
 
-	return `${
-		process.env.NEXT_PUBLIC_YNDX_MAPS_STATIC_API_URL
-	}?${params.toString()}`;
+	return imageURL.toString();
 }

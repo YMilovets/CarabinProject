@@ -6,7 +6,8 @@ export interface PlacesCardProps {
 	date: string;
 	title: string;
 	category?: string;
-	description: string;
+	description?: string;
 	moreBtnComponent?: ReactNode;
 	address: string;
+	author?: string;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarMonth, FmdGood } from "@mui/icons-material";
+import { CalendarMonth, FmdGood, Person2 } from "@mui/icons-material";
 import {
 	Box,
 	Card,
@@ -25,6 +25,7 @@ function PlacesCard({
 	category,
 	moreBtnComponent,
 	address,
+	author,
 }: PlacesCardProps) {
 	return (
 		<Grid size={LibraryGridPos}>
@@ -47,12 +48,25 @@ function PlacesCard({
 				<CardContent
 					sx={{
 						display: "grid",
-						alignContent: "space-between",
 						gap: 1,
 					}}
 				>
 					<Typography variant="body1">{description}</Typography>
-					<Typography sx={{ display: "flex", gap: 0.5 }} variant="body2">
+					{author && (
+						<Typography
+							variant="caption"
+							sx={{
+								display: "flex",
+								alignItems: "center",
+								gap: 0.5,
+								pr: 2,
+							}}
+						>
+							<Person2 fontSize="small" color="primary" />
+							{author}
+						</Typography>
+					)}
+					<Typography sx={{ display: "flex", gap: 0.5 }} variant="caption">
 						<FmdGood fontSize="small" color="primary" />
 						{address}
 					</Typography>
@@ -62,9 +76,16 @@ function PlacesCard({
 						sx={{
 							display: "flex",
 							justifyContent: "space-between",
+							flexWrap: "wrap",
+							gap: 1,
 						}}
 					>
-						{category && <Chip sx={{ borderRadius: 1 }} label={category} />}
+						{category && (
+							<Chip
+								sx={{ borderRadius: 1, maxWidth: "13em" }}
+								label={category}
+							/>
+						)}
 						<Chip
 							sx={{ borderRadius: 1 }}
 							icon={<CalendarMonth sx={{ width: 16 }} />}

@@ -1,5 +1,7 @@
+import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
 
+import { authConfig } from "../config";
 import { connectDB } from "../utils";
 
 import { PLACES_DB } from "./constants";
@@ -14,6 +16,7 @@ export default async function sendNewPlace({
 	long,
 }: SendPlaceType) {
 	const t = await getTranslations("feedbackPage");
+	const session = await getServerSession(authConfig);
 
 	const client = await connectDB(String(process.env.DB_DATABASE));
 
@@ -50,6 +53,7 @@ export default async function sendNewPlace({
 			description,
 			isPublished: false,
 			date: new Date(),
+			author: session?.user?.name ?? undefined,
 		});
 
 		return fetchResponse({

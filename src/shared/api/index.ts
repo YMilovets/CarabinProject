@@ -9,6 +9,7 @@ export { default as postPlace } from "./postPlace";
 export { default as postPlacesFromDB } from "./postPlacesFromDB";
 export { default as sendNewPlace } from "./sendNewPlace";
 export { default as createNewUser } from "./signup";
+export { default as redirectStaticMap } from "./staticMap";
 export type {
 	DadataAddressData,
 	DadataSuggestion,

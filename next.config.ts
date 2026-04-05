@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: "https",
-				hostname: "static-maps.yandex.ru",
+				hostname: String(process.env.NEXT_PUBLIC_URL),
 			},
 		],
 	},

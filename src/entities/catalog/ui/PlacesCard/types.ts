@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
 
 export interface PlacesCardProps {
-	url?: string;
-	alt?: string;
+	imageComponent?: ReactNode;
 	date: string;
 	title: string;
 	category?: string;

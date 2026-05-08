@@ -6,13 +6,12 @@ import { useTranslations } from "next-intl";
 
 import { PlacesCard, useGetPlacesQuery } from "@/src/entities/catalog";
 import { useCatalogParams } from "@/src/features/catalog/hooks";
-import { useTheme } from "@/src/shared/hooks";
+import { YMapImage } from "@/src/shared";
 import { formatDate } from "@/src/shared/utils/client";
 
 import PlacesAlert from "../PlacesAlert";
 
 import { GRID_GAP } from "./constants";
-import getStaticYandexImageURL from "./utils";
 
 function PlacesCatalog() {
 	const t = useTranslations("common");
@@ -25,7 +24,6 @@ function PlacesCatalog() {
 			skip: Object.keys(selectedCategories).length === 0,
 		},
 	);
-	const { isDarkMode } = useTheme();
 
 	const { data: calalog = [] } = { ...data };
 
@@ -49,8 +47,13 @@ function PlacesCatalog() {
 								key={_id.toString()}
 								description={description}
 								title={category}
-								url={getStaticYandexImageURL(lat, long, isDarkMode)}
-								alt={cT("imageText", { address })}
+								imageComponent={
+									<YMapImage
+										lat={lat}
+										long={long}
+										alt={cT("imageText", { address })}
+									/>
+								}
 								category={category}
 								date={formatDate(date)}
 								address={address}

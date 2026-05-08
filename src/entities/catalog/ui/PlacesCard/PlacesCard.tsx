@@ -12,16 +12,13 @@ import {
 	Typography,
 } from "@mui/material";
 
-import Image from "next/image";
-
-import { HEIGHT, LibraryGridPos, WIDTH } from "./constants";
+import { LibraryGridPos } from "./constants";
 import { PlacesCardProps } from "./types";
 
 function PlacesCard({
 	description,
 	date,
-	url,
-	alt,
+	imageComponent,
 	category,
 	moreBtnComponent,
 	address,
@@ -30,20 +27,8 @@ function PlacesCard({
 	return (
 		<Grid size={LibraryGridPos}>
 			<Card sx={{ display: "grid", height: "100%" }}>
-				{url && (
-					<CardMedia title={address}>
-						<Image
-							alt={alt ?? ""}
-							src={url}
-							sizes="100vw"
-							style={{
-								width: "100%",
-								height: "100%",
-							}}
-							width={WIDTH}
-							height={HEIGHT}
-						/>
-					</CardMedia>
+				{imageComponent && (
+					<CardMedia title={address}>{imageComponent}</CardMedia>
 				)}
 				<CardContent
 					sx={{

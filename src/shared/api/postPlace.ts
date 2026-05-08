@@ -15,6 +15,7 @@ export default async function postPlace(request: NextRequest) {
 		address,
 		lat,
 		long,
+		token,
 	} = await request.json();
 
 	if (await isDeniedAccess(request)) {
@@ -30,5 +31,6 @@ export default async function postPlace(request: NextRequest) {
 		address,
 		lat,
 		long,
+		token,
 	});
 }

@@ -3,13 +3,12 @@ import { getTranslations } from "next-intl/server";
 
 import { Response, sendNewPlace } from "@/src/shared/api";
 
+import { FeedbackStatus } from "./types";
+
 export async function handleSubmit(
-	_: Response<{
-		message: string;
-		isSuccess?: boolean;
-	}>,
+	_: Response<FeedbackStatus>,
 	formData: FormData,
-): Promise<Response<{ message: string; isSuccess?: boolean }>> {
+): Promise<Response<FeedbackStatus>> {
 	const t = await getTranslations("feedbackPage");
 
 	try {
@@ -18,6 +17,7 @@ export async function handleSubmit(
 		const description = formData.get("description")?.toString();
 		const lat = formData.get("lat")?.toString();
 		const long = formData.get("long")?.toString();
+		const token = formData.get("token")?.toString();
 
 		if (!category?.trim()) {
 			throw new Error(t("errorPlaceCategory"));
@@ -35,6 +35,14 @@ export async function handleSubmit(
 			throw new Error(t("errorPlaceLngLat"));
 		}
 
+		if (!token) {
+			throw new Error(
+				t("errorRecapthaCode", {
+					email: process.env.NEXT_PUBLIC_EMAIL ?? "",
+				}),
+			);
+		}
+
 		const parseFloatLat = typeof lat === "number" ? lat : parseFloat(lat);
 		const parseFloatLong = typeof long === "number" ? long : parseFloat(long);
 
@@ -44,6 +52,7 @@ export async function handleSubmit(
 			description,
 			lat: parseFloatLat,
 			long: parseFloatLong,
+			token,
 		});
 		return {
 			data: { message: t("successSendPlace"), isSuccess: true },

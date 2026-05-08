@@ -8,18 +8,24 @@ import { useTimeoutWhen } from "rooks";
 import { redirect } from "next/navigation";
 
 import { AlertCard, Form, Pages } from "@/src/shared";
+import { getRecaptchaToken } from "@/src/shared/utils/client";
 
 import { handleSubmit } from "./actions";
-import { initialState, MILLISECONDS, TIME_REDIRECT, WAIT } from "./constants";
+import {
+	ACTION_NAME,
+	initialState,
+	MILLISECONDS,
+	TIME_REDIRECT,
+	WAIT,
+} from "./constants";
 import { SignUpFormProps } from "./types";
-import { getRecaptchaToken } from "./utils";
 
 function SignUpForm({ children }: SignUpFormProps) {
 	const t = useTranslations("signupPage");
 
 	const handleSignIn = async (_: unknown, formData: FormData) => {
 		try {
-			const token = await getRecaptchaToken();
+			const token = await getRecaptchaToken(ACTION_NAME);
 
 			formData.set("token", token);
 

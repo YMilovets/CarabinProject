@@ -22,6 +22,7 @@
 		"paths": {
 			"@/*": ["./*"]
 		},
+		"types": ["node", "grecaptcha"],
 		"typeRoots": [
 			"./node_modules/@types",
 			"./node_modules/@yandex/ymaps3-types"

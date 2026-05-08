@@ -158,6 +158,7 @@ export type SendPlaceType = {
 	address: string;
 	lat: string | number;
 	long: string | number;
+	token: string;
 };
 
 export type UserType = {
@@ -199,8 +200,8 @@ type BaseRecaptchaSuccessResponseType = {
 export type RecaptchaResponseType<T extends boolean = boolean> = T extends true
 	? {
 			success: T;
-	  } & BaseRecaptchaSuccessResponseType
+		} & BaseRecaptchaSuccessResponseType
 	: {
 			success: T;
 			"error-codes": Array<string>;
-	  };
+		};

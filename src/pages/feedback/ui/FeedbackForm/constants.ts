@@ -5,3 +5,5 @@ export const initialState = {
 
 export const TIME_REDIRECT = 5000;
 export const MILLISECONDS = 1000;
+
+export const ACTION_NAME = "feedback";

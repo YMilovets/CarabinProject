@@ -6,7 +6,7 @@ import { connectDB } from "../utils";
 
 import { PLACES_DB } from "./constants";
 import { SendPlaceType, Status } from "./types";
-import { fetchResponse } from "./utils";
+import { fetchResponse, verifyRecaptchaToken } from "./utils";
 
 export default async function sendNewPlace({
 	category,
@@ -14,6 +14,7 @@ export default async function sendNewPlace({
 	address,
 	lat,
 	long,
+	token,
 }: SendPlaceType) {
 	const t = await getTranslations("feedbackPage");
 	const session = await getServerSession(authConfig);
@@ -23,6 +24,7 @@ export default async function sendNewPlace({
 	try {
 		const connection = client.db();
 		const places = connection.collection(PLACES_DB);
+		const verifyResponse = await verifyRecaptchaToken(token);
 
 		if (!category.trim()) {
 			throw new Error(t("errorPlaceCategory"));
@@ -38,6 +40,16 @@ export default async function sendNewPlace({
 
 		if (typeof long === "string" && !long.trim()) {
 			throw new Error(t("errorPlaceLngLat"));
+		}
+
+		if (!verifyResponse.success) {
+			throw new Error(
+				t("errorRecapthaCode", { email: process.env.NEXT_PUBLIC_EMAIL ?? "" }),
+			);
+		}
+
+		if (verifyResponse.score < 0.5) {
+			throw new Error(t("errorRecapthaBot"));
 		}
 
 		const parseFloatLat = typeof lat === "number" ? lat : parseFloat(lat);

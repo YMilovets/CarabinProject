@@ -8,15 +8,33 @@ import { useTimeoutWhen } from "rooks";
 
 import { redirect } from "next/navigation";
 
-import { AlertCard, Pages } from "@/src/shared";
+import { AlertCard, Pages, Response } from "@/src/shared";
+import { getRecaptchaToken } from "@/src/shared/utils/client";
 
 import { containerStyle } from "../constants";
 
 import { handleSubmit } from "./actions";
-import { initialState, MILLISECONDS, TIME_REDIRECT } from "./constants";
-import { FeedbackFormProps } from "./types";
+import {
+	ACTION_NAME,
+	initialState,
+	MILLISECONDS,
+	TIME_REDIRECT,
+} from "./constants";
+import { FeedbackFormProps, FeedbackStatus } from "./types";
 
 function FeedbackForm({ children }: FeedbackFormProps) {
+	const t = useTranslations("feedbackPage");
+
+	const handleAction = async (
+		response: Response<FeedbackStatus>,
+		formData: FormData,
+	) => {
+		const token = await getRecaptchaToken(ACTION_NAME);
+		formData.set("token", token);
+
+		return await handleSubmit(response, formData);
+	};
+
 	const [
 		{
 			error,
@@ -24,8 +42,7 @@ function FeedbackForm({ children }: FeedbackFormProps) {
 		},
 		formAction,
 		isPending,
-	] = useActionState(handleSubmit, initialState);
-	const t = useTranslations("feedbackPage");
+	] = useActionState(handleAction, initialState);
 
 	useTimeoutWhen(
 		() => {

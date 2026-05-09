@@ -57,7 +57,12 @@ function PlacesCatalog() {
 								category={category}
 								date={formatDate(date)}
 								address={address}
-								moreBtnComponent={<Button>{cT("view")}</Button>}
+								moreBtnComponent={
+									<>
+										<Button>{cT("view")}</Button>
+										<Button>{cT("removePublication")}</Button>
+									</>
+								}
 								author={author}
 							/>
 						),

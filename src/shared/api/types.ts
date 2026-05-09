@@ -1,4 +1,4 @@
-import { FindCursor, ObjectId, WithId } from "mongodb";
+import { Filter, FindCursor, ObjectId, UpdateFilter, WithId } from "mongodb";
 import { User } from "next-auth";
 
 export type Response<TBody> = {
@@ -35,6 +35,13 @@ export type CollectionDataType<TResponse> = {
 	onResponse?: (
 		response: FindCursor<WithId<TResponse>>,
 	) => FindCursor<WithId<TResponse>>;
+};
+
+export type UpdateDataType<TResponse> = {
+	filter: Filter<TResponse>;
+	update: Array<TResponse> | UpdateFilter<TResponse>;
+	result: string;
+	error: string;
 };
 
 export enum Status {

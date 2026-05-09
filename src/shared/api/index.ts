@@ -1,5 +1,5 @@
 export { default as getAuthorization } from "./auth";
-export { PLACES_DB } from "./constants";
+export { PLACES_DB, PUBLICATION_API } from "./constants";
 export { default as getGeoData } from "./getGeoData";
 export { default as getMapSDK } from "./getMapSDK";
 export { default as getPlacesCategoriesFromDB } from "./getPlacesCategoriesFromDB";
@@ -17,6 +17,7 @@ export type {
 	DadataAddressData,
 	DadataSuggestion,
 	GeoDataRequest,
+	PlacesResponse,
 	Response,
 	YandexGeocodeResponse,
 } from "./types";

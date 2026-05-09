@@ -23,3 +23,4 @@ export {
 	sortingReducerPath,
 } from "./model";
 export { default as PlacesCard } from "./ui/PlacesCard";
+export { getApiURL } from "./utils";

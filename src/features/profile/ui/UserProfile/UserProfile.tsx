@@ -9,6 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Menu, ProfileRoute } from "@/src/shared";
+import { PublicationsRoute } from "@/src/shared/config/pages";
 import { useMenu, useProfileId } from "@/src/shared/hooks";
 
 import styles from "./UserProfile.module.css";
@@ -23,8 +24,10 @@ function UserProfile() {
 
 	const t = useTranslations("common");
 	const pT = useTranslations("profilePage");
+	const pubT = useTranslations("publicationPage");
 
 	const isProfile = pathname === ProfileRoute;
+	const isPublications = pathname === PublicationsRoute;
 
 	if (!data) return null;
 	return (
@@ -54,6 +57,15 @@ function UserProfile() {
 					component={Link}
 				>
 					{pT("title")}
+				</MenuItem>,
+				<MenuItem
+					onClick={onClose}
+					key="publication"
+					selected={isPublications}
+					href={PublicationsRoute}
+					component={Link}
+				>
+					{pubT("title")}
 				</MenuItem>,
 				<MenuItem
 					onClick={() => {

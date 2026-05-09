@@ -8,6 +8,7 @@ export enum Pages {
 }
 
 export const ProfileRoute = "/profile";
+export const PublicationsRoute = "/publications";
 
 export const PagesList: Array<Omit<PageType, "value">> = [
 	{

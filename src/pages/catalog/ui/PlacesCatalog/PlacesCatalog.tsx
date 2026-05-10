@@ -53,6 +53,7 @@ function PlacesCatalog() {
 										lat={lat}
 										long={long}
 										alt={cT("imageText", { address })}
+										apiURL={window.location.origin}
 									/>
 								}
 								category={category}

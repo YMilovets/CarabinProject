@@ -12,7 +12,7 @@ import PublicationAlert from "../PublicationAlert";
 
 import { GRID_GAP } from "./constants";
 
-const getPublications = async () => {
+async function getPublications() {
 	try {
 		const response = await fetch(`${getApiURL()}/${PUBLICATION_API}`, {
 			next: {
@@ -25,7 +25,7 @@ const getPublications = async () => {
 	} catch (e) {
 		return { data: [], error: (e as Error).message };
 	}
-};
+}
 
 async function PublicationList() {
 	const { data, error } = await getPublications();
@@ -62,7 +62,9 @@ async function PublicationList() {
 						description={description}
 						category={category}
 						date={formatDate(date)}
-						imageComponent={<YMapImage lat={lat} long={long} />}
+						imageComponent={
+							<YMapImage apiURL={getApiURL()} lat={lat} long={long} />
+						}
 						moreBtnComponent={
 							<ControlBtn publicationId={_id.toString()} address={address} />
 						}

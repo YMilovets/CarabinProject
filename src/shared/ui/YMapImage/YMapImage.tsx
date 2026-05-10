@@ -6,16 +6,26 @@ import Image from "next/image";
 
 import { useTheme } from "@/src/shared/hooks";
 
-import { HEIGHT, WIDTH } from "./constants";
+import { HEIGHT, IMAGE_PATH, WIDTH } from "./constants";
 import { YMapImageProps } from "./types";
-import getStaticYandexImageURL from "./utils";
 
-function YMapImage({ lat, long, alt }: YMapImageProps) {
+function YMapImage({ lat, long, alt, apiURL }: YMapImageProps) {
 	const { isDarkMode } = useTheme();
+
+	const pathAPI = process.env.NEXT_PUBLIC_API_PATH ?? "";
+
+	const imageURL = new URL(`${pathAPI}/${IMAGE_PATH}`, apiURL);
+
+	imageURL.searchParams.append("lat", lat.toString());
+	imageURL.searchParams.append("long", long.toString());
+	if (isDarkMode) {
+		imageURL.searchParams.append("isDarkMode", "1");
+	}
+
 	return (
 		<Image
 			alt={alt ?? ""}
-			src={getStaticYandexImageURL(lat, long, isDarkMode)}
+			src={imageURL.toString()}
 			sizes="100vw"
 			style={{
 				width: "100%",

@@ -5,6 +5,7 @@ import { Button, CircularProgress, Grid } from "@mui/material";
 import { useTranslations } from "next-intl";
 
 import { PlacesCard, useGetPlacesQuery } from "@/src/entities/catalog";
+import { PlacesControl } from "@/src/features/catalog";
 import { useCatalogParams } from "@/src/features/catalog/hooks";
 import { YMapImage } from "@/src/shared";
 import { formatDate } from "@/src/shared/utils/client";
@@ -60,7 +61,7 @@ function PlacesCatalog() {
 								moreBtnComponent={
 									<>
 										<Button>{cT("view")}</Button>
-										<Button>{cT("removePublication")}</Button>
+										<PlacesControl id={_id.toString()} address={address} />
 									</>
 								}
 								author={author}

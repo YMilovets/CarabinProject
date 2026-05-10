@@ -12,6 +12,7 @@ import {
 
 import PlacesCatalog from "./PlacesCatalog";
 import PlacesControl from "./PlacesControl";
+import PlacesModal from "./PlacesModal";
 
 import styles from "./Catalog.module.css";
 
@@ -34,6 +35,7 @@ async function Catalog() {
 				<PlacesCategories />
 			</PlacesControl>
 			<PlacesCatalog />
+			<PlacesModal />
 		</section>
 	);
 }

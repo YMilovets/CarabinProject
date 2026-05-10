@@ -7,6 +7,7 @@ export {
 	useRemovePlaceMutation,
 } from "./api/getPlaces";
 export {
+	resetCategory,
 	searchReducer,
 	searchReducerPath,
 	selectedCategoryReducer,

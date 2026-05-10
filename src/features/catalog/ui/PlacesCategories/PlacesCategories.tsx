@@ -11,6 +11,7 @@ import {
 } from "@/src/entities/catalog";
 
 import { useCatalogParams } from "../../hooks";
+import CategoryReset from "../CategoryReset";
 
 import { getStyles } from "./utils";
 
@@ -31,6 +32,7 @@ function PlacesCategories() {
 	if (isError) return null;
 	return (
 		<Box sx={getStyles}>
+			<CategoryReset />
 			<Swiper className={styles.swiper} spaceBetween={10} width={100}>
 				{categories.map(({ _id }) => (
 					<SwiperSlide className={styles.swiper__slide} key={_id}>

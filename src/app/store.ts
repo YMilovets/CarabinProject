@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-import { categoriesMiddleware, placesMiddleware } from "@/src/entities/catalog";
+import { placesMiddleware } from "@/src/entities/catalog";
 import {
 	geoMiddleware,
 	geoSearchMiddleware,
@@ -16,7 +16,6 @@ export function setupStore() {
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware()
 				.concat(placesMiddleware)
-				.concat(categoriesMiddleware)
 				.concat(mapMiddleware)
 				.concat(geoMiddleware)
 				.concat(geoSearchMiddleware),

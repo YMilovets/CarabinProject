@@ -1,14 +1,10 @@
 export {
-	categoriesMiddleware,
-	categoriesReducer,
-	categoriesReducerPath,
-	useGetCategoriesQuery,
-} from "./api/getCategories";
-export {
 	placesMiddleware,
 	placesReducer,
 	placesReducerPath,
+	useGetCategoriesQuery,
 	useGetPlacesQuery,
+	useRemovePlaceMutation,
 } from "./api/getPlaces";
 export {
 	searchReducer,

@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { CATEGORY_SLICE_TITLE } from "../constants";
 
-const initialState: { selectCategories: Record<string, boolean> } = {
+import { InitialStateCategoriesType } from "./types";
+
+const initialState: InitialStateCategoriesType = {
 	selectCategories: {},
 };
 

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { MobileMenu, Navigation } from "@/src/features/header";
 import { ThemeControl } from "@/src/features/main";
 import { UserProfile } from "@/src/features/profile";
-import { DisplayObserver } from "@/src/shared";
+import { DisplayObserver, SessionObserver } from "@/src/shared";
 
 import ToolbarContainer from "../Toolbar";
 
@@ -36,7 +36,9 @@ async function Header() {
 					<DisplayObserver width={500}>
 						<ThemeControl />
 					</DisplayObserver>
-					<UserProfile />
+					<SessionObserver isAuthentificated>
+						<UserProfile />
+					</SessionObserver>
 				</Box>
 			</Toolbar>
 		</ToolbarContainer>

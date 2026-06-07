@@ -1,16 +1,15 @@
 "use client";
 
 import React from "react";
-import { Avatar, IconButton, MenuItem } from "@mui/material";
-import { signOut, useSession } from "next-auth/react";
+import { Avatar, IconButton } from "@mui/material";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { Menu, ProfileRoute } from "@/src/shared";
-import { PublicationsRoute } from "@/src/shared/config/pages";
+import { useGetRoleQuery } from "@/src/entities/users";
+import { Menu } from "@/src/shared";
 import { useMenu, useProfileId } from "@/src/shared/hooks";
+
+import UserMenu from "../UserMenu";
 
 import styles from "./UserProfile.module.css";
 
@@ -20,16 +19,13 @@ function UserProfile() {
 	const { anchorEl, isOpen, onClick, onClose } = useMenu();
 	const { buttonId, menuId } = useProfileId();
 
-	const pathname = usePathname();
+	const { user } = { ...data };
+	const { image } = { ...user };
 
 	const t = useTranslations("common");
-	const pT = useTranslations("profilePage");
-	const pubT = useTranslations("publicationPage");
 
-	const isProfile = pathname === ProfileRoute;
-	const isPublications = pathname === PublicationsRoute;
+	useGetRoleQuery({});
 
-	if (!data) return null;
 	return (
 		<Menu
 			buttonRenderFn={(isBtnOpen, ariaLabel, btnId) => (
@@ -43,40 +39,12 @@ function UserProfile() {
 					onClick={onClick}
 					sx={{ p: 0.5 }}
 				>
-					<Avatar src={data.user?.image ?? undefined} />
+					<Avatar src={image ?? undefined} />
 				</IconButton>
 			)}
 			anchorEl={anchorEl}
 			isOpen={isOpen}
-			menuChildren={[
-				<MenuItem
-					onClick={onClose}
-					key="title"
-					selected={isProfile}
-					href={ProfileRoute}
-					component={Link}
-				>
-					{pT("title")}
-				</MenuItem>,
-				<MenuItem
-					onClick={onClose}
-					key="publication"
-					selected={isPublications}
-					href={PublicationsRoute}
-					component={Link}
-				>
-					{pubT("title")}
-				</MenuItem>,
-				<MenuItem
-					onClick={() => {
-						onClose();
-						signOut({ callbackUrl: "/" });
-					}}
-					key="exit"
-				>
-					{t("exit")}
-				</MenuItem>,
-			]}
+			menuChildren={[<UserMenu key="menu" onClose={onClose} />]}
 			onClose={onClose}
 			menuId={menuId}
 			buttonId={buttonId}

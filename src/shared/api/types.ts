@@ -49,6 +49,7 @@ export enum Status {
 	Success = 200,
 	ServerError = 500,
 	Unauthorized = 401,
+	AccessDenied = 403,
 }
 
 export type Params = { id: string };

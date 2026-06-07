@@ -1,10 +1,11 @@
 export { default as getAuthorization } from "./auth";
-export { PLACES_DB, PUBLICATION_API } from "./constants";
+export { PLACES_DB, PUBLICATION_API, ROLE_API } from "./constants";
 export { default as getGeoData } from "./getGeoData";
 export { default as getMapSDK } from "./getMapSDK";
 export { default as getPlacesCategoriesFromDB } from "./getPlacesCategoriesFromDB";
 export { default as getPlacesFromDB } from "./getPlacesFromDB";
 export { default as getPublications } from "./getPublications";
+export { default as getRole } from "./getRole";
 export { default as patchPublish } from "./patchPublish";
 export { default as patchRemove } from "./patchRemove";
 export { default as postAddressSearch } from "./postAddressSearch";
@@ -19,5 +20,6 @@ export type {
 	GeoDataRequest,
 	PlacesResponse,
 	Response,
+	UserType,
 	YandexGeocodeResponse,
 } from "./types";

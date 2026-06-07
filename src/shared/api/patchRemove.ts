@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { NextRequest } from "next/server";
 
 import { PLACES_DB } from "./constants";
+import { getUserRoleByEmail } from "./getUserRoleByEmail";
 import patchPlaces from "./patchPlaces";
 import { RouteProps, Status } from "./types";
 import { fetchResponse, isDeniedAccess } from "./utils";
@@ -23,6 +24,13 @@ export default async function patchPublish(
 		return fetchResponse({
 			data: t("unauthorized"),
 			status: Status.Unauthorized,
+		});
+	}
+
+	if ((await getUserRoleByEmail()) !== "admin") {
+		return fetchResponse({
+			data: t("accessRemoveDenied"),
+			status: Status.AccessDenied,
 		});
 	}
 

@@ -3,6 +3,7 @@ export const USERS_DB = "users";
 export const FORMAT_JSON = "json";
 
 export const PUBLICATION_API = "publications";
+export const ROLE_API = "role";
 
 export const STATIC_MAP_WIDTH = 450;
 export const STATIC_MAP_HEIGHT = 338;

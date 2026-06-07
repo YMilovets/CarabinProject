@@ -2,10 +2,19 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 
+import { cookies } from "next/headers";
+
 import { getApiURL, PlacesCard } from "@/src/entities/catalog";
 import { ControlBtn } from "@/src/features/publications";
 import { YMapImage } from "@/src/shared";
-import { PlacesResponse, PUBLICATION_API, Response } from "@/src/shared/api";
+import {
+	PlacesResponse,
+	PUBLICATION_API,
+	Response,
+	ROLE_API,
+	UserType,
+} from "@/src/shared/api";
+import { getHeaders } from "@/src/shared/utils";
 import { formatDate } from "@/src/shared/utils/client";
 
 import PublicationAlert from "../PublicationAlert";
@@ -27,13 +36,38 @@ async function getPublications() {
 	}
 }
 
+async function getUserRole() {
+	const cookiesStore = await cookies();
+
+	try {
+		const response = await fetch(`${getApiURL()}/${ROLE_API}`, {
+			method: "GET",
+			headers: getHeaders(["Cookie", cookiesStore.toString()]),
+		});
+		const { data }: Response<UserType["role"]> = await response.json();
+
+		return { data, error: null };
+	} catch (error) {
+		return { data: null, error: (error as Error).message };
+	}
+}
+
 async function PublicationList() {
 	const { data, error } = await getPublications();
+	const { data: role, error: roleError } = await getUserRole();
 	const t = await getTranslations("common");
 	const pubT = await getTranslations("publicationPage");
 
 	if (error) {
 		return <PublicationAlert>{t("refusedConnection")}</PublicationAlert>;
+	}
+
+	if (role !== "admin" || roleError) {
+		return (
+			<PublicationAlert severity="error" headerTitle={t("error")}>
+				{pubT("accessPublishDenied")}
+			</PublicationAlert>
+		);
 	}
 
 	if (data.length === 0) {

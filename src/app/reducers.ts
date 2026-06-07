@@ -21,6 +21,7 @@ import {
 	mapReducerPath,
 } from "@/src/entities/feedback";
 import { modalReducer, modalReducerPath } from "@/src/entities/modal";
+import { usersReducer, usersReducerPath } from "@/src/entities/users";
 
 export const rootReducer = combineReducers({
 	[searchReducerPath]: searchReducer,
@@ -32,4 +33,5 @@ export const rootReducer = combineReducers({
 	[mapFeedbackReducerPath]: mapFeedbackReducer,
 	[geoSearchPath]: geoSearchReducer,
 	[modalReducerPath]: modalReducer,
+	[usersReducerPath]: usersReducer,
 });

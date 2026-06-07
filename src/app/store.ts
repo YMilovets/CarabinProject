@@ -7,6 +7,7 @@ import {
 	geoSearchMiddleware,
 	mapMiddleware,
 } from "@/src/entities/feedback";
+import { usersMiddleware } from "@/src/entities/users";
 
 import { rootReducer } from "./reducers";
 
@@ -18,7 +19,8 @@ export function setupStore() {
 				.concat(placesMiddleware)
 				.concat(mapMiddleware)
 				.concat(geoMiddleware)
-				.concat(geoSearchMiddleware),
+				.concat(geoSearchMiddleware)
+				.concat(usersMiddleware),
 	});
 }
 const store = setupStore();

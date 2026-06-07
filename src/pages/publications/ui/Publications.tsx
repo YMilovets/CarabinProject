@@ -6,8 +6,7 @@ import { Metadata } from "next";
 import { PublicationModal } from "@/src/features/publications";
 
 import PublicationList from "./PublicationList";
-
-import styles from "./Publications.module.css";
+import PublicationSection from "./PublicationSection";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const messages = await getMessages();
@@ -19,10 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 function Publications() {
 	return (
-		<section className={styles.root}>
+		<PublicationSection>
 			<PublicationList />
 			<PublicationModal />
-		</section>
+		</PublicationSection>
 	);
 }
 

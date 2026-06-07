@@ -1,7 +1,0 @@
-.root {
-	display: grid;
-	align-items: flex-start;
-	justify-content: space-between;
-	padding: 7.5em 3.75em;
-	grid-template-columns: 1fr;
-}

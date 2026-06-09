@@ -17,5 +17,5 @@ export async function handlePublishAction(formData: FormData) {
 		headers: getHeaders(["Cookie", cookiesStore.toString()]),
 	});
 
-	revalidateTag(PUBLICATION_API);
+	revalidateTag(PUBLICATION_API, "max");
 }

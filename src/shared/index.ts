@@ -5,6 +5,7 @@ export type { PageType } from "./config/types";
 export { default as AlertCard } from "./ui/AlertCard";
 export { default as DisplayObserver } from "./ui/DisplayObserver";
 export { default as Form } from "./ui/Form";
+export { default as InvertedCardMedia } from "./ui/InvertedCardMedia";
 export { default as Menu } from "./ui/Menu";
 export { default as MenuLink } from "./ui/MenuLink";
 export { default as NextLinkComposed } from "./ui/NextLinkComposed";

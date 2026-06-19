@@ -8,19 +8,21 @@ import { usePathname } from "next/navigation";
 
 import { ButtonLinkProps } from "./types";
 
-function ButtonLink({ children, path, ...props }: ButtonLinkProps) {
+function ButtonLink({ children, path, sx, ...props }: ButtonLinkProps) {
 	const pathname = usePathname();
 
 	const isCurrent = pathname?.replace("/", "") === path;
 
 	return (
 		<Button
-			{...props}
 			variant={isCurrent ? "outlined" : "text"}
+			{...props}
 			LinkComponent={Link}
 			href={path}
 			sx={{
+				...sx,
 				padding: "6px 15px",
+				textAlign: "center",
 			}}
 		>
 			{children}
